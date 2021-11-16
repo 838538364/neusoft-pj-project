@@ -1,9 +1,9 @@
 # neusoft-pj-project
 计算机学院专业建设自评管理系统，项目开发一组的代码仓库
 
+<br>
 
-
-
+<br>
 
 ## 技术选型
 
@@ -30,7 +30,7 @@
 - Bootstrap 3.3.7
 - Thymeleaf 3.0.x
 
-
+<br><br>
 
 
 
