@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.PtmEduGuidedMapper">
+    
+    <resultMap type="PtmEduGuided" id="PtmEduGuidedResult">
+        <result property="empName"    column="emp_name"    />
+        <result property="highestEducation"    column="highest_education"    />
+        <result property="major"    column="major"    />
+        <result property="workStation"    column="work_station"    />
+        <result property="teachTime"    column="teach_time"    />
+        <result property="cla"    column="cla"    />
+        <result property="stuId"    column="stu_id"    />
+        <result property="stuName"    column="stu_name"    />
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPtmEduGuidedVo">
+        select emp_name, highest_education, major, work_station, teach_time, cla, stu_id, stu_name, id, create_by, create_time, update_by, update_time, remark from ptm_edu_guided
+    </sql>
+
+    <select id="selectPtmEduGuidedList" parameterType="PtmEduGuided" resultMap="PtmEduGuidedResult">
+        <include refid="selectPtmEduGuidedVo"/>
+        <where>  
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+        </where>
+    </select>
+    
+    <select id="selectPtmEduGuidedById" parameterType="Long" resultMap="PtmEduGuidedResult">
+        <include refid="selectPtmEduGuidedVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPtmEduGuided" parameterType="PtmEduGuided" useGeneratedKeys="true" keyProperty="id">
+        insert into ptm_edu_guided
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empName != null">emp_name,</if>
+            <if test="highestEducation != null">highest_education,</if>
+            <if test="major != null">major,</if>
+            <if test="workStation != null">work_station,</if>
+            <if test="teachTime != null">teach_time,</if>
+            <if test="cla != null">cla,</if>
+            <if test="stuId != null">stu_id,</if>
+            <if test="stuName != null">stu_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empName != null">#{empName},</if>
+            <if test="highestEducation != null">#{highestEducation},</if>
+            <if test="major != null">#{major},</if>
+            <if test="workStation != null">#{workStation},</if>
+            <if test="teachTime != null">#{teachTime},</if>
+            <if test="cla != null">#{cla},</if>
+            <if test="stuId != null">#{stuId},</if>
+            <if test="stuName != null">#{stuName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePtmEduGuided" parameterType="PtmEduGuided">
+        update ptm_edu_guided
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="highestEducation != null">highest_education = #{highestEducation},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="workStation != null">work_station = #{workStation},</if>
+            <if test="teachTime != null">teach_time = #{teachTime},</if>
+            <if test="cla != null">cla = #{cla},</if>
+            <if test="stuId != null">stu_id = #{stuId},</if>
+            <if test="stuName != null">stu_name = #{stuName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePtmEduGuidedById" parameterType="Long">
+        delete from ptm_edu_guided where id = #{id}
+    </delete>
+
+    <delete id="deletePtmEduGuidedByIds" parameterType="String">
+        delete from ptm_edu_guided where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

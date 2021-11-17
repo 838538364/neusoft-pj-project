@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.PtmEduSoccoIndustrialMapper">
+    
+    <resultMap type="PtmEduSoccoIndustrial" id="PtmEduSoccoIndustrialResult">
+        <result property="id"    column="id"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="unitIndustry"    column="unit_industry"    />
+        <result property="manager"    column="manager"    />
+        <result property="estTime"    column="est_time"    />
+        <result property="cooperationYear"    column="cooperation_year"    />
+        <result property="personnelTraining"    column="personnel_training"    />
+        <result property="constructionTeacher"    column="construction_teacher"    />
+        <result property="textbookDev"    column="textbook_dev"    />
+        <result property="laboratory"    column="laboratory"    />
+        <result property="other"    column="other"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPtmEduSoccoIndustrialVo">
+        select id, college_name, unit_industry, manager, est_time, cooperation_year, personnel_training, construction_teacher, textbook_dev, laboratory, other, use_status, create_by, create_time, update_by, update_time, remark from ptm_edu_socco_industrial
+    </sql>
+
+    <select id="selectPtmEduSoccoIndustrialList" parameterType="PtmEduSoccoIndustrial" resultMap="PtmEduSoccoIndustrialResult">
+        <include refid="selectPtmEduSoccoIndustrialVo"/>
+        <where>  
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="manager != null  and manager != ''"> and manager = #{manager}</if>
+        </where>
+    </select>
+    
+    <select id="selectPtmEduSoccoIndustrialById" parameterType="Long" resultMap="PtmEduSoccoIndustrialResult">
+        <include refid="selectPtmEduSoccoIndustrialVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPtmEduSoccoIndustrial" parameterType="PtmEduSoccoIndustrial" useGeneratedKeys="true" keyProperty="id">
+        insert into ptm_edu_socco_industrial
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null">college_name,</if>
+            <if test="unitIndustry != null">unit_industry,</if>
+            <if test="manager != null">manager,</if>
+            <if test="estTime != null">est_time,</if>
+            <if test="cooperationYear != null">cooperation_year,</if>
+            <if test="personnelTraining != null">personnel_training,</if>
+            <if test="constructionTeacher != null">construction_teacher,</if>
+            <if test="textbookDev != null">textbook_dev,</if>
+            <if test="laboratory != null">laboratory,</if>
+            <if test="other != null">other,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null">#{collegeName},</if>
+            <if test="unitIndustry != null">#{unitIndustry},</if>
+            <if test="manager != null">#{manager},</if>
+            <if test="estTime != null">#{estTime},</if>
+            <if test="cooperationYear != null">#{cooperationYear},</if>
+            <if test="personnelTraining != null">#{personnelTraining},</if>
+            <if test="constructionTeacher != null">#{constructionTeacher},</if>
+            <if test="textbookDev != null">#{textbookDev},</if>
+            <if test="laboratory != null">#{laboratory},</if>
+            <if test="other != null">#{other},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePtmEduSoccoIndustrial" parameterType="PtmEduSoccoIndustrial">
+        update ptm_edu_socco_industrial
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collegeName != null">college_name = #{collegeName},</if>
+            <if test="unitIndustry != null">unit_industry = #{unitIndustry},</if>
+            <if test="manager != null">manager = #{manager},</if>
+            <if test="estTime != null">est_time = #{estTime},</if>
+            <if test="cooperationYear != null">cooperation_year = #{cooperationYear},</if>
+            <if test="personnelTraining != null">personnel_training = #{personnelTraining},</if>
+            <if test="constructionTeacher != null">construction_teacher = #{constructionTeacher},</if>
+            <if test="textbookDev != null">textbook_dev = #{textbookDev},</if>
+            <if test="laboratory != null">laboratory = #{laboratory},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePtmEduSoccoIndustrialById" parameterType="Long">
+        delete from ptm_edu_socco_industrial where id = #{id}
+    </delete>
+
+    <delete id="deletePtmEduSoccoIndustrialByIds" parameterType="String">
+        delete from ptm_edu_socco_industrial where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

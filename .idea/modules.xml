@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-common/ruoyi-common.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-common/ruoyi-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-framework/ruoyi-framework.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-framework/ruoyi-framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-generator/ruoyi-generator.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-generator/ruoyi-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-one/ruoyi-one.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-one/ruoyi-one.iml" />
       <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-quartz/ruoyi-quartz.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-quartz/ruoyi-quartz.iml" />
       <module fileurl="file://$PROJECT_DIR$/RuoYi-master/ruoyi-system/ruoyi-system.iml" filepath="$PROJECT_DIR$/RuoYi-master/ruoyi-system/ruoyi-system.iml" />
     </modules>
