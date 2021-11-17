@@ -2,6 +2,7 @@ package com.ruoyi.framework.shiro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.constant.UserConstants;
@@ -16,7 +17,6 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ShiroUtils;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.service.ISysUserService;
@@ -104,7 +104,7 @@ public class SysLoginService
         passwordService.validate(user, password);
 
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
-        recordLoginInfo(user.getUserId());
+        recordLoginInfo(user);
         return user;
     }
 
@@ -130,13 +130,9 @@ public class SysLoginService
 
     /**
      * 记录登录信息
-     *
-     * @param userId 用户ID
      */
-    public void recordLoginInfo(Long userId)
+    public void recordLoginInfo(SysUser user)
     {
-        SysUser user = new SysUser();
-        user.setUserId(userId);
         user.setLoginIp(ShiroUtils.getIp());
         user.setLoginDate(DateUtils.getNowDate());
         userService.updateUserInfo(user);

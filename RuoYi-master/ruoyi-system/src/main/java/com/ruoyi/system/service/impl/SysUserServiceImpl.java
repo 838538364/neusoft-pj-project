@@ -12,11 +12,9 @@ import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.ServiceException;
-import com.ruoyi.common.utils.ShiroUtils;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.Md5Utils;
-import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysUserPost;
 import com.ruoyi.system.domain.SysUserRole;
@@ -162,7 +160,6 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
     public int deleteUserById(Long userId)
     {
         // 删除用户与角色关联
@@ -179,18 +176,13 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
-    public int deleteUserByIds(String ids)
+    public int deleteUserByIds(String ids) throws BusinessException
     {
         Long[] userIds = Convert.toLongArray(ids);
         for (Long userId : userIds)
         {
             checkUserAllowed(new SysUser(userId));
         }
-        // 删除用户与角色关联
-        userRoleMapper.deleteUserRole(userIds);
-        // 删除用户与岗位关联
-        userPostMapper.deleteUserPost(userIds);
         return userMapper.deleteUserByIds(userIds);
     }
 
@@ -267,7 +259,6 @@ public class SysUserServiceImpl implements ISysUserService
      * @param roleIds 角色组
      */
     @Override
-    @Transactional
     public void insertUserAuth(Long userId, Long[] roleIds)
     {
         userRoleMapper.deleteUserRoleByUserId(userId);
@@ -289,8 +280,7 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 新增用户角色信息
      * 
-     * @param userId 用户ID
-     * @param roleIds 角色组
+     * @param user 用户对象
      */
     public void insertUserRole(Long userId, Long[] roleIds)
     {
@@ -401,27 +391,7 @@ public class SysUserServiceImpl implements ISysUserService
     {
         if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
         {
-            throw new ServiceException("不允许操作超级管理员用户");
-        }
-    }
-
-    /**
-     * 校验用户是否有数据权限
-     * 
-     * @param userId 用户id
-     */
-    @Override
-    public void checkUserDataScope(Long userId)
-    {
-        if (!SysUser.isAdmin(ShiroUtils.getUserId()))
-        {
-            SysUser user = new SysUser();
-            user.setUserId(userId);
-            List<SysUser> users = SpringUtils.getAopProxy(this).selectUserList(user);
-            if (StringUtils.isEmpty(users))
-            {
-                throw new ServiceException("没有权限访问用户数据！");
-            }
+            throw new BusinessException("不允许操作超级管理员用户");
         }
     }
 
@@ -482,7 +452,7 @@ public class SysUserServiceImpl implements ISysUserService
     {
         if (StringUtils.isNull(userList) || userList.size() == 0)
         {
-            throw new ServiceException("导入用户数据不能为空！");
+            throw new BusinessException("导入用户数据不能为空！");
         }
         int successNum = 0;
         int failureNum = 0;
@@ -527,7 +497,7 @@ public class SysUserServiceImpl implements ISysUserService
         if (failureNum > 0)
         {
             failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
-            throw new ServiceException(failureMsg.toString());
+            throw new BusinessException(failureMsg.toString());
         }
         else
         {

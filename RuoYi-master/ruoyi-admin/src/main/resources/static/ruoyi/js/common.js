@@ -2,9 +2,6 @@
  * 通用方法封装处理
  * Copyright (c) 2019 ruoyi 
  */
-
-var startLayDate;
-var endLayDate;
 $(function() {
 	
     //  layer扩展皮肤
@@ -40,6 +37,23 @@ $(function() {
         })
     }
 	
+    // 气泡弹出框特效（移到元素时）
+    $(document).on("mouseenter", '.table [data-toggle="popover"]', function() {
+        var _this = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function() {
+            $(_this).popover('hide');
+        });
+    })
+
+    // 气泡弹出框特效（离开元素时）
+    $(document).on("mouseleave", '.table [data-toggle="popover"]', function() {
+        var _this = this;
+        setTimeout(function() {
+            if (!$(".popover:hover").length) $(_this).popover("hide");
+        }, 100);
+    });
+	
     // 取消回车自动提交表单
     $(document).on("keypress", ":input:not(textarea):not([type=submit])", function(event) {
         if (event.keyCode == 13) {
@@ -51,41 +65,39 @@ $(function() {
     if ($(".select-time").length > 0) {
        layui.use('laydate', function() {
             var laydate = layui.laydate;
-            startLayDate = laydate.render({
+            var startDate = laydate.render({
                 elem: '#startTime',
                 max: $('#endTime').val(),
                 theme: 'molv',
-                type: $('#startTime').attr("data-type") || 'date',
                 trigger: 'click',
                 done: function(value, date) {
                     // 结束时间大于开始时间
                     if (value !== '') {
-                        endLayDate.config.min.year = date.year;
-                        endLayDate.config.min.month = date.month - 1;
-                        endLayDate.config.min.date = date.date;
+                        endDate.config.min.year = date.year;
+                        endDate.config.min.month = date.month - 1;
+                        endDate.config.min.date = date.date;
                     } else {
-                        endLayDate.config.min.year = '';
-                        endLayDate.config.min.month = '';
-                        endLayDate.config.min.date = '';
+                        endDate.config.min.year = '';
+                        endDate.config.min.month = '';
+                        endDate.config.min.date = '';
                     }
                 }
             });
-            endLayDate = laydate.render({
+            var endDate = laydate.render({
                 elem: '#endTime',
                 min: $('#startTime').val(),
                 theme: 'molv',
-                type: $('#endTime').attr("data-type") || 'date',
                 trigger: 'click',
                 done: function(value, date) {
                     // 开始时间小于结束时间
                     if (value !== '') {
-                        startLayDate.config.max.year = date.year;
-                        startLayDate.config.max.month = date.month - 1;
-                        startLayDate.config.max.date = date.date;
+                        startDate.config.max.year = date.year;
+                        startDate.config.max.month = date.month - 1;
+                        startDate.config.max.date = date.date;
                     } else {
-                        startLayDate.config.max.year = '2099';
-                        startLayDate.config.max.month = '12';
-                        startLayDate.config.max.date = '31';
+                        startDate.config.max.year = '2099';
+                        startDate.config.max.month = '12';
+                        startDate.config.max.date = '31';
                     }
                 }
             });
@@ -252,8 +264,8 @@ var closeItem = function(dataId){
 }
 
 /** 创建选项卡 */
-function createMenuItem(dataUrl, menuName, isRefresh) {
-    var panelUrl = window.frameElement.getAttribute('data-id'),
+function createMenuItem(dataUrl, menuName) {
+    var panelUrl = window.frameElement.getAttribute('data-id');
     dataIndex = $.common.random(1, 100),
     flag = true;
     if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
@@ -273,9 +285,6 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
                     }
                 });
             }
-            if (isRefresh) {
-            	refreshTab();
-            }
             flag = false;
             return false;
         }
@@ -290,7 +299,7 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
         $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
         
         window.parent.$.modal.loading("数据加载中，请稍后...");
-        $('.mainContent iframe:visible', topWindow).on('load', function() {
+        $('.mainContent iframe:visible', topWindow).load(function () {
             window.parent.$.modal.closeLoading();
         });
 
@@ -299,15 +308,6 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
         scrollToTab($('.menuTab.active', topWindow));
     }
     return false;
-}
-
-// 刷新iframe
-function refreshTab() {
-	var topWindow = $(window.parent.document);
-	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
-	var target = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow);
-    var url = target.attr('src');
-	target.attr('src', url).ready();
 }
 
 // 滚动到指定选项卡
@@ -338,23 +338,13 @@ function scrollToTab(element) {
     $('.page-tabs-content', topWindow).animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
 }
 
-// 计算元素集合的总宽度
+//计算元素集合的总宽度
 function calSumWidth(elements) {
     var width = 0;
     $(elements).each(function() {
         width += $(this).outerWidth(true);
     });
     return width;
-}
-
-// 返回当前激活的Tab页面关联的iframe的Windows对象
-function activeWindow() {
-	var topWindow = $(window.parent.document);
-	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
-	if (!currentId) {
-		return window.parent;
-	}
-    return $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
 }
 
 /** 密码规则范围验证 */
@@ -418,36 +408,24 @@ var storage = {
 // 主子表操作封装处理
 var sub = {
     editColumn: function() {
-    	var dataColumns = [];
-		for (var columnIndex = 0; columnIndex < table.options.columns.length; columnIndex++) {
-    		if (table.options.columns[columnIndex].visible != false) {
-    			dataColumns.push(table.options.columns[columnIndex]);
-    		}
-    	}
-		var params = new Array();
-		var data = $("#" + table.options.id).bootstrapTable('getData');
-    	var count = data.length;
-    	for (var dataIndex = 0; dataIndex < count; dataIndex++) {
+    	var count = $("#" + table.options.id).bootstrapTable('getData').length;
+    	var params = new Array();
+    	for (var dataIndex = 0; dataIndex <= count; dataIndex++) {
     	    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
     	    var obj = new Object();
     	    for (var i = 0; i < columns.length; i++) {
     	        var inputValue = $(columns[i]).find('input');
     	        var selectValue = $(columns[i]).find('select');
-    	        var textareaValue = $(columns[i]).find('textarea');
-    	        var key = dataColumns[i].field;
+    	        var key = table.options.columns[i].field;
     	        if ($.common.isNotEmpty(inputValue.val())) {
     	            obj[key] = inputValue.val();
     	        } else if ($.common.isNotEmpty(selectValue.val())) {
     	            obj[key] = selectValue.val();
-    	        } else if ($.common.isNotEmpty(textareaValue.val())) {
-    	            obj[key] = textareaValue.val();
     	        } else {
     	            obj[key] = "";
     	        }
     	    }
-    	    var item = data[dataIndex];
-    	    var extendObj = $.extend({}, item, obj);
-    	    params.push({ index: dataIndex, row: extendObj });
+    	    params.push({ index: dataIndex, row: obj });
     	}
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
     },
@@ -460,16 +438,6 @@ var sub = {
             return;
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
-    },
-    addColumn: function(row, tableId) {
-    	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
-    	table.set(currentId);
-    	var count = $("#" + currentId).bootstrapTable('getData').length;
-    	sub.editColumn();
-    	$("#" + currentId).bootstrapTable('insertRow', {
-            index: count + 1,
-            row: row
-        });
     }
 };
 
@@ -490,44 +458,6 @@ function loadJs(file, headElem) {
     script.type = 'text/javascript';
     if (headElem) headElem.appendChild(script);
     else document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-// 禁止后退键（Backspace）
-window.onload = function() {
-	document.getElementsByTagName("body")[0].onkeydown = function() {
-		// 获取事件对象  
-		var elem = event.relatedTarget || event.srcElement || event.target || event.currentTarget;
-		// 判断按键为backSpace键  
-		if (event.keyCode == 8) {
-			// 判断是否需要阻止按下键盘的事件默认传递  
-			var name = elem.nodeName;
-			var className = elem.className;
-			// 屏蔽特定的样式名称
-			if (className.indexOf('note-editable') != -1)
-			{
-				return true;
-			}
-			if (name != 'INPUT' && name != 'TEXTAREA') {
-				return _stopIt(event);
-			}
-			var type_e = elem.type.toUpperCase();
-			if (name == 'INPUT' && (type_e != 'TEXT' && type_e != 'TEXTAREA' && type_e != 'PASSWORD' && type_e != 'FILE' && type_e != 'SEARCH')) {
-				return _stopIt(event);
-			}
-			if (name == 'INPUT' && (elem.readOnly == true || elem.disabled == true)) {
-				return _stopIt(event);
-			}
-		}
-	};
-};
-function _stopIt(e) {
-	if (e.returnValue) {
-		e.returnValue = false;
-	}
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	return false;
 }
 
 /** 设置全局ajax处理 */

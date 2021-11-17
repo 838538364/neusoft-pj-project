@@ -35,9 +35,6 @@
 			     <a class="btn btn-success multiple disabled" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
 			        <i class="fa fa-download"></i> 生成
 			    </a>
-				<a class="btn btn-success" onclick="createTable()">
-					<i class="fa fa-plus"></i> 创建
-				</a>
 				<a class="btn btn-info" onclick="importTable()">
 			        <i class="fa fa-upload"></i> 导入
 			    </a>
@@ -146,11 +143,10 @@
 				if (result.code == web_status.SUCCESS) {
 					 var items = [];
 		                $.each(result.data, function(index, value) {
+		                	var highCode = hljs.highlightAuto(value).value;
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
-		                    	var language = templateName.substring(templateName.lastIndexOf(".") + 1);
-			                    var highCode = hljs.highlight(language, value).value;
-		                    	items.push({
+			                    items.push({
 			                        title: templateName , content: "<pre class=\"layui-code\"><code>" + highCode + "</code></pre>"
 			                    })
 		                    }
@@ -201,17 +197,11 @@
 		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
 		    });
 		}
-
+		
 		// 导入表结构
 		function importTable() {
 			var importTableUrl = prefix + "/importTable";
 			$.modal.open("导入表结构", importTableUrl);
-		}
-
-		// 创建表结构
-		function createTable() {
-			var creatTableUrl = prefix + "/createTable";
-			$.modal.open("创建表结构", creatTableUrl);
 		}
 	</script>
 </body>

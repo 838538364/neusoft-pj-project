@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
-import com.ruoyi.common.config.RuoYiConfig;
+import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
 import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
@@ -33,7 +33,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = Global.getProfile();
 
     public static void setDefaultBaseDir(String defaultBaseDir)
     {
@@ -127,7 +127,7 @@ public class FileUploadUtils
         return fileName;
     }
 
-    public static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
+    private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
     {
         File desc = new File(uploadDir + File.separator + fileName);
 
@@ -141,9 +141,9 @@ public class FileUploadUtils
         return desc;
     }
 
-    public static final String getPathFileName(String uploadDir, String fileName) throws IOException
+    private static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
-        int dirLastIndex = RuoYiConfig.getProfile().length() + 1;
+        int dirLastIndex = Global.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;
@@ -195,6 +195,7 @@ public class FileUploadUtils
                 throw new InvalidExtensionException(allowedExtension, extension, fileName);
             }
         }
+
     }
 
     /**

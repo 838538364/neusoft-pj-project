@@ -18,16 +18,6 @@ public class Constants
     public static final String GBK = "GBK";
 
     /**
-     * http请求
-     */
-    public static final String HTTP = "http://";
-
-    /**
-     * https请求
-     */
-    public static final String HTTPS = "https://";
-
-    /**
      * 通用成功标识
      */
     public static final String SUCCESS = "0";
@@ -78,11 +68,6 @@ public class Constants
     public static final String IS_ASC = "isAsc";
 
     /**
-     * 系统用户授权缓存
-     */
-    public static final String SYS_AUTH_CACHE = "sys-authCache";
-
-    /**
      * 参数管理 cache name
      */
     public static final String SYS_CONFIG_CACHE = "sys-config";
@@ -106,14 +91,4 @@ public class Constants
      * 资源映射路径 前缀
      */
     public static final String RESOURCE_PREFIX = "/profile";
-
-    /**
-     * RMI 远程方法调用
-     */
-    public static final String LOOKUP_RMI = "rmi://";
-
-    /**
-     * LDAP 远程方法调用
-     */
-    public static final String LOOKUP_LDAP = "ldap://";
 }

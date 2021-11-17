@@ -90,7 +90,7 @@ public interface ISysUserService
      * @return 结果
      * @throws Exception 异常
      */
-    public int deleteUserByIds(String ids);
+    public int deleteUserByIds(String ids) throws Exception;
 
     /**
      * 保存用户信息
@@ -170,13 +170,6 @@ public interface ISysUserService
      * @param user 用户信息
      */
     public void checkUserAllowed(SysUser user);
-
-    /**
-     * 校验用户是否有数据权限
-     * 
-     * @param userId 用户id
-     */
-    public void checkUserDataScope(Long userId);
 
     /**
      * 根据用户ID查询用户所属角色组

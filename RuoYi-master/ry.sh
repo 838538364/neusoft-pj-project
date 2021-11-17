@@ -1,12 +1,8 @@
-#!/bin/sh
-# author ruoyi
-# ./ry.sh start 启动
-# ./ry.sh stop 停止
-# ./ry.sh restart 重启
-# ./ry.sh status 状态
+#!/bin/bash
+
 AppName=ruoyi-admin.jar
 
-# JVM参数
+#JVM参数
 JVM_OPTS="-Dname=$AppName  -Duser.timezone=Asia/Shanghai -Xms512M -Xmx512M -XX:PermSize=256M -XX:MaxPermSize=512M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDateStamps  -XX:+PrintGCDetails -XX:NewRatio=1 -XX:SurvivorRatio=30 -XX:+UseParallelGC -XX:+UseParallelOldGC"
 APP_HOME=`pwd`
 LOG_PATH=$APP_HOME/logs/$AppName.log
@@ -30,7 +26,7 @@ function start()
 	if [ x"$PID" != x"" ]; then
 	    echo "$AppName is running..."
 	else
-		nohup java $JVM_OPTS -jar $AppName > /dev/null 2>&1 &
+		nohup java -jar  $JVM_OPTS target/$AppName > /dev/null 2>&1 &
 		echo "Start $AppName success..."
 	fi
 }
@@ -38,7 +34,7 @@ function start()
 function stop()
 {
     echo "Stop $AppName"
-
+	
 	PID=""
 	query(){
 		PID=`ps -ef |grep java|grep $AppName|grep -v grep|awk '{print $2}'`

@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 	<select id="selectOnlineById" parameterType="String" resultMap="SysUserOnlineResult">
 		<include refid="selectOnlineVo"/>
-		where sessionId = #{sessionId}
+		where sessionid = #{sessionid}
 	</select>
 
 	<insert id="saveOnline" parameterType="SysUserOnline">

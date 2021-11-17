@@ -108,7 +108,7 @@ public class Arith
                     "The scale must be a positive integer or zero");
         }
         BigDecimal b = new BigDecimal(Double.toString(v));
-        BigDecimal one = BigDecimal.ONE;
+        BigDecimal one = new BigDecimal("1");
         return b.divide(one, scale, RoundingMode.HALF_UP).doubleValue();
     }
 }

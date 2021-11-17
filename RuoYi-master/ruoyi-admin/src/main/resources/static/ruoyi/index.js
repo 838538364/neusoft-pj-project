@@ -80,10 +80,7 @@ function syncMenuTab(dataId) {
             $dataObj.parents("ul").addClass("in")
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
             $dataObj.parents("ul").css('height', 'auto').height();
-            $(".nav ul li, .nav li").removeClass("selected");
-            $dataObj.parent("li").addClass("selected");
-            setIframeUrl(dataId);
-            
+            $dataObj.click();
             // 顶部菜单同步处理
             var tabStr = $dataObj.parents(".tab-pane").attr("id");
             if ($.common.isNotEmpty(tabStr)) {
@@ -105,17 +102,6 @@ function fixedSidebar() {
     setTimeout(function() {
         $('#side-menu').fadeIn(500);
     }, 100);
-}
-
-// 设置锚点
-function setIframeUrl(href) {
-	if($.common.equals("history", mode)) {
-	    storage.set('publicPath', href);
-	} else {
-	    var nowUrl = window.location.href;
-	    var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
-	    window.location.href = newUrl + "#" + href;
-	}
 }
 
 function SmoothlyMenu() {
@@ -263,7 +249,6 @@ $(function() {
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
         menuName = $.trim($(this).text()),
-        isRefresh = $(this).data("refresh"),
         flag = true;
 
         var $dataObj = $('a[href$="' + decodeURI(dataUrl) + '"]');
@@ -293,9 +278,6 @@ $(function() {
                         }
                     });
                 }
-                if (isRefresh) {
-                    refreshTab();
-                }
                 flag = false;
                 return false;
             }
@@ -311,7 +293,7 @@ $(function() {
 
             $.modal.loading("数据加载中，请稍后...");
 
-            $('.mainContent iframe:visible').on('load', function() {
+            $('.mainContent iframe:visible').load(function () {
             	$.modal.closeLoading();
             });
 
@@ -342,7 +324,7 @@ $(function() {
         if ($(this).parents('.menuTab').hasClass('active')) {
 
             // 当前元素后面有同辈元素，使后面的一个元素处于活动状态
-            if ($(this).parents('.menuTab').next('.menuTab').length) {
+            if ($(this).parents('.menuTab').next('.menuTab').size()) {
 
                 var activeId = $(this).parents('.menuTab').next('.menuTab:eq(0)').data('id');
                 $(this).parents('.menuTab').next('.menuTab:eq(0)').addClass('active');
@@ -372,7 +354,7 @@ $(function() {
             }
 
             // 当前元素后面没有同辈元素，使当前元素的上一个元素处于活动状态
-            if ($(this).parents('.menuTab').prev('.menuTab').length) {
+            if ($(this).parents('.menuTab').prev('.menuTab').size()) {
                 var activeId = $(this).parents('.menuTab').prev('.menuTab:last').data('id');
                 $(this).parents('.menuTab').prev('.menuTab:last').addClass('active');
                 $('.mainContent .RuoYi_iframe').each(function() {
@@ -498,12 +480,6 @@ $(function() {
     $('#fullScreen').on('click', function () {
     	$(document).toggleFullScreen();
     });
-    
-    // 锁定屏幕
-    $('#lockScreen').on('click', function () {
-    	storage.set('lockPath', $('.page-tabs-content').find('.active').attr('data-id'));
-    	location.href  = ctx + "lockscreen";
-    });
 
     // 页签刷新按钮
     $('.tabReload').on('click', refreshTab);
@@ -544,6 +520,17 @@ $(function() {
     function activeTabMax() {
         $('#content-main').toggleClass('max');
         $('#ax_close_max').show();
+    }
+
+    // 设置锚点
+    function setIframeUrl(href) {
+    	if($.common.equals("history", mode)) {
+    	    storage.set('publicPath', href);
+    	} else {
+    	    var nowUrl = window.location.href;
+    	    var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
+    	    window.location.href = newUrl + "#" + href;
+    	}
     }
 
     $(window).keydown(function(event) {
@@ -631,7 +618,7 @@ $(function() {
                     var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
                     var url = target.attr('src');
                     $.modal.loading("数据加载中，请稍后...");
-                    target.attr('src', url).on('load', function() {
+                    target.attr('src', url).load(function () {
                     	$.modal.closeLoading();
                     });
                 }

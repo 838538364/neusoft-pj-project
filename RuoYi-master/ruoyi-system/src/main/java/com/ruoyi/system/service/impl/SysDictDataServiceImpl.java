@@ -64,32 +64,29 @@ public class SysDictDataServiceImpl implements ISysDictDataService
      * @return 结果
      */
     @Override
-    public void deleteDictDataByIds(String ids)
+    public int deleteDictDataByIds(String ids)
     {
-        Long[] dictCodes = Convert.toLongArray(ids);
-        for (Long dictCode : dictCodes)
+        int row = dictDataMapper.deleteDictDataByIds(Convert.toStrArray(ids));
+        if (row > 0)
         {
-            SysDictData data = selectDictDataById(dictCode);
-            dictDataMapper.deleteDictDataById(dictCode);
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
-            DictUtils.setDictCache(data.getDictType(), dictDatas);
+            DictUtils.clearDictCache();
         }
+        return row;
     }
 
     /**
      * 新增保存字典数据信息
      * 
-     * @param data 字典数据信息
+     * @param dictData 字典数据信息
      * @return 结果
      */
     @Override
-    public int insertDictData(SysDictData data)
+    public int insertDictData(SysDictData dictData)
     {
-        int row = dictDataMapper.insertDictData(data);
+        int row = dictDataMapper.insertDictData(dictData);
         if (row > 0)
         {
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
-            DictUtils.setDictCache(data.getDictType(), dictDatas);
+            DictUtils.clearDictCache();
         }
         return row;
     }
@@ -97,17 +94,16 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     /**
      * 修改保存字典数据信息
      * 
-     * @param data 字典数据信息
+     * @param dictData 字典数据信息
      * @return 结果
      */
     @Override
-    public int updateDictData(SysDictData data)
+    public int updateDictData(SysDictData dictData)
     {
-        int row = dictDataMapper.updateDictData(data);
+        int row = dictDataMapper.updateDictData(dictData);
         if (row > 0)
         {
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
-            DictUtils.setDictCache(data.getDictType(), dictDatas);
+            DictUtils.clearDictCache();
         }
         return row;
     }

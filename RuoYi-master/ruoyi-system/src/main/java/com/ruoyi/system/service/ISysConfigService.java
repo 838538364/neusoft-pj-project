@@ -56,22 +56,12 @@ public interface ISysConfigService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public void deleteConfigByIds(String ids);
+    public int deleteConfigByIds(String ids);
 
     /**
-     * 加载参数缓存数据
+     * 清空缓存数据
      */
-    public void loadingConfigCache();
-
-    /**
-     * 清空参数缓存数据
-     */
-    public void clearConfigCache();
-
-    /**
-     * 重置参数缓存数据
-     */
-    public void resetConfigCache();
+    public void clearCache();
 
     /**
      * 校验参数键名是否唯一

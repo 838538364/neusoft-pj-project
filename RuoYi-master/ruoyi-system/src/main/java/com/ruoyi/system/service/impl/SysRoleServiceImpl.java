@@ -11,10 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysRole;
-import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.ServiceException;
-import com.ruoyi.common.utils.ShiroUtils;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysRoleDept;
@@ -135,13 +133,8 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 结果
      */
     @Override
-    @Transactional
     public boolean deleteRoleById(Long roleId)
     {
-        // 删除角色与菜单关联
-        roleMenuMapper.deleteRoleMenuByRoleId(roleId);
-        // 删除角色与部门关联
-        roleDeptMapper.deleteRoleDeptByRoleId(roleId);
         return roleMapper.deleteRoleById(roleId) > 0 ? true : false;
     }
 
@@ -152,8 +145,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @throws Exception
      */
     @Override
-    @Transactional
-    public int deleteRoleByIds(String ids)
+    public int deleteRoleByIds(String ids) throws BusinessException
     {
         Long[] roleIds = Convert.toLongArray(ids);
         for (Long roleId : roleIds)
@@ -162,13 +154,9 @@ public class SysRoleServiceImpl implements ISysRoleService
             SysRole role = selectRoleById(roleId);
             if (countUserRoleByRoleId(roleId) > 0)
             {
-                throw new ServiceException(String.format("%1$s已分配,不能删除", role.getRoleName()));
+                throw new BusinessException(String.format("%1$s已分配,不能删除", role.getRoleName()));
             }
         }
-        // 删除角色与菜单关联
-        roleMenuMapper.deleteRoleMenu(roleIds);
-        // 删除角色与部门关联
-        roleDeptMapper.deleteRoleDept(roleIds);
         return roleMapper.deleteRoleByIds(roleIds);
     }
 
@@ -316,27 +304,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     {
         if (StringUtils.isNotNull(role.getRoleId()) && role.isAdmin())
         {
-            throw new ServiceException("不允许操作超级管理员角色");
-        }
-    }
-
-    /**
-     * 校验角色是否有数据权限
-     * 
-     * @param roleId 角色id
-     */
-    @Override
-    public void checkRoleDataScope(Long roleId)
-    {
-        if (!SysUser.isAdmin(ShiroUtils.getUserId()))
-        {
-            SysRole role = new SysRole();
-            role.setRoleId(roleId);
-            List<SysRole> roles = SpringUtils.getAopProxy(this).selectRoleList(role);
-            if (StringUtils.isEmpty(roles))
-            {
-                throw new ServiceException("没有权限访问角色数据！");
-            }
+            throw new BusinessException("不允许操作超级管理员角色");
         }
     }
 

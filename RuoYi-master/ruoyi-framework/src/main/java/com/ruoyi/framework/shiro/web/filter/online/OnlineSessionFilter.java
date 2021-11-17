@@ -7,6 +7,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.core.domain.entity.SysUser;
@@ -28,6 +29,7 @@ public class OnlineSessionFilter extends AccessControlFilter
     @Value("${shiro.user.loginUrl}")
     private String loginUrl;
 
+    @Autowired
     private OnlineSessionDAO onlineSessionDAO;
 
     /**
@@ -90,10 +92,5 @@ public class OnlineSessionFilter extends AccessControlFilter
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException
     {
         WebUtils.issueRedirect(request, response, loginUrl);
-    }
-
-    public void setOnlineSessionDAO(OnlineSessionDAO onlineSessionDAO)
-    {
-        this.onlineSessionDAO = onlineSessionDAO;
     }
 }

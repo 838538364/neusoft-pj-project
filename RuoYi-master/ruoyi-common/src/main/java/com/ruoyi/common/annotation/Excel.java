@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
-import com.ruoyi.common.utils.poi.ExcelHandlerAdapter;
 
 /**
  * 自定义导出Excel数据注解
@@ -107,37 +106,6 @@ public @interface Excel
     public boolean isStatistics() default false;
 
     /**
-     * 导出字段对齐方式（0：默认；1：靠左；2：居中；3：靠右）
-     */
-    public Align align() default Align.AUTO;
-
-    /**
-     * 自定义数据处理器
-     */
-    public Class<?> handler() default ExcelHandlerAdapter.class;
-
-    /**
-     * 自定义数据处理器参数
-     */
-    public String[] args() default {};
-
-    public enum Align
-    {
-        AUTO(0), LEFT(1), CENTER(2), RIGHT(3);
-        private final int value;
-
-        Align(int value)
-        {
-            this.value = value;
-        }
-
-        public int value()
-        {
-            return this.value;
-        }
-    }
-
-    /**
      * 字段类型（0：导出导入；1：仅导出；2：仅导入）
      */
     Type type() default Type.ALL;
@@ -160,7 +128,7 @@ public @interface Excel
 
     public enum ColumnType
     {
-        NUMERIC(0), STRING(1), IMAGE(2);
+        NUMERIC(0), STRING(1);
         private final int value;
 
         ColumnType(int value)

@@ -94,8 +94,18 @@ public class KickoutSessionFilter extends AccessControlFilter
             // 如果队列里的sessionId数超出最大会话数，开始踢人
             while (deque.size() > maxSession)
             {
+                Serializable kickoutSessionId = null;
                 // 是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户；
-                Serializable kickoutSessionId = kickoutAfter ? deque.removeFirst() : deque.removeLast();
+                if (kickoutAfter)
+                {
+                    // 踢出后者
+                    kickoutSessionId = deque.removeFirst();
+                }
+                else
+                {
+                    // 踢出前者
+                    kickoutSessionId = deque.removeLast();
+                }
                 // 踢出后再更新下缓存队列
                 cache.put(loginName, deque);
 
@@ -116,7 +126,7 @@ public class KickoutSessionFilter extends AccessControlFilter
             }
 
             // 如果被踢出了，(前者或后者)直接退出，重定向到踢出后的地址
-            if (session.getAttribute("kickout") != null && (Boolean) session.getAttribute("kickout") == true)
+            if ((Boolean) session.getAttribute("kickout") != null && (Boolean) session.getAttribute("kickout") == true)
             {
                 // 退出登录
                 subject.logout();

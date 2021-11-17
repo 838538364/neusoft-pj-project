@@ -19,6 +19,7 @@ import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.service.ISysDeptService;
 
@@ -58,10 +59,6 @@ public class SysDeptController extends BaseController
     @GetMapping("/add/{parentId}")
     public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
     {
-        if (!getSysUser().isAdmin())
-        {
-            parentId = getSysUser().getDeptId();
-        }
         mmap.put("dept", deptService.selectDeptById(parentId));
         return prefix + "/add";
     }
@@ -79,7 +76,7 @@ public class SysDeptController extends BaseController
         {
             return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
         }
-        dept.setCreateBy(getLoginName());
+        dept.setCreateBy(ShiroUtils.getLoginName());
         return toAjax(deptService.insertDept(dept));
     }
 
@@ -89,7 +86,6 @@ public class SysDeptController extends BaseController
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
-        deptService.checkDeptDataScope(deptId);
         SysDept dept = deptService.selectDeptById(deptId);
         if (StringUtils.isNotNull(dept) && 100L == deptId)
         {
@@ -121,7 +117,7 @@ public class SysDeptController extends BaseController
         {
             return AjaxResult.error("该部门包含未停用的子部门！");
         }
-        dept.setUpdateBy(getLoginName());
+        dept.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(deptService.updateDept(dept));
     }
 
@@ -189,7 +185,7 @@ public class SysDeptController extends BaseController
     public List<Ztree> treeDataExcludeChild(@PathVariable(value = "excludeId", required = false) Long excludeId)
     {
         SysDept dept = new SysDept();
-        dept.setExcludeId(excludeId);
+        dept.setDeptId(excludeId);
         List<Ztree> ztrees = deptService.selectDeptTreeExcludeChild(dept);
         return ztrees;
     }

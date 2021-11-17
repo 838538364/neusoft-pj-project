@@ -21,9 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.security.CipherUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
@@ -45,6 +43,8 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 @Configuration
 public class ShiroConfig
 {
+    public static final String PREMISSION_STRING = "perms[\"{0}\"]";
+
     /**
      * Session超时时间，单位为毫秒（默认30分钟）
      */
@@ -124,12 +124,6 @@ public class ShiroConfig
     private String unauthorizedUrl;
 
     /**
-     * 是否开启记住我功能
-     */
-    @Value("${shiro.rememberMe.enabled: false}")
-    private boolean rememberMe;
-
-    /**
      * 缓存管理器 使用Ehcache实现
      */
     @Bean
@@ -181,7 +175,6 @@ public class ShiroConfig
     public UserRealm userRealm(EhCacheManager cacheManager)
     {
         UserRealm userRealm = new UserRealm();
-        userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
         return userRealm;
     }
@@ -242,7 +235,7 @@ public class ShiroConfig
         // 设置realm.
         securityManager.setRealm(userRealm);
         // 记住我
-        securityManager.setRememberMeManager(rememberMe ? rememberMeManager() : null);
+        securityManager.setRememberMeManager(rememberMeManager());
         // 注入缓存管理器;
         securityManager.setCacheManager(getEhCacheManager());
         // session管理器
@@ -278,7 +271,6 @@ public class ShiroConfig
         // 对静态资源设置匿名访问
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ruoyi.png**", "anon");
-        filterChainDefinitionMap.put("/html/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/docs/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -315,27 +307,28 @@ public class ShiroConfig
     /**
      * 自定义在线用户处理过滤器
      */
+    @Bean
     public OnlineSessionFilter onlineSessionFilter()
     {
         OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
         onlineSessionFilter.setLoginUrl(loginUrl);
-        onlineSessionFilter.setOnlineSessionDAO(sessionDAO());
         return onlineSessionFilter;
     }
 
     /**
      * 自定义在线用户同步过滤器
      */
+    @Bean
     public SyncOnlineSessionFilter syncOnlineSessionFilter()
     {
         SyncOnlineSessionFilter syncOnlineSessionFilter = new SyncOnlineSessionFilter();
-        syncOnlineSessionFilter.setOnlineSessionDAO(sessionDAO());
         return syncOnlineSessionFilter;
     }
 
     /**
      * 自定义验证码过滤器
      */
+    @Bean
     public CaptchaValidateFilter captchaValidateFilter()
     {
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
@@ -364,14 +357,7 @@ public class ShiroConfig
     {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
-        if (StringUtils.isNotEmpty(cipherKey))
-        {
-            cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
-        }
-        else
-        {
-            cookieRememberMeManager.setCipherKey(CipherUtils.generateNewKey(128, "AES").getEncoded());
-        }
+        cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
         return cookieRememberMeManager;
     }
 

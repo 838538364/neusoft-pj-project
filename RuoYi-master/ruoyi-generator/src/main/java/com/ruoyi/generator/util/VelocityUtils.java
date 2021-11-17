@@ -273,7 +273,6 @@ public class VelocityUtils
             if (!column.isSuperColumn() && GenConstants.TYPE_DATE.equals(column.getJavaType()))
             {
                 importList.add("java.util.Date");
-                importList.add("com.fasterxml.jackson.annotation.JsonFormat");
             }
             else if (!column.isSuperColumn() && GenConstants.TYPE_BIGDECIMAL.equals(column.getJavaType()))
             {
@@ -303,8 +302,7 @@ public class VelocityUtils
      */
     public static String getParentMenuId(JSONObject paramsObj)
     {
-        if (StringUtils.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.PARENT_MENU_ID)
-                && StringUtils.isNotEmpty(paramsObj.getString(GenConstants.PARENT_MENU_ID)))
+        if (StringUtils.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.PARENT_MENU_ID))
         {
             return paramsObj.getString(GenConstants.PARENT_MENU_ID);
         }
