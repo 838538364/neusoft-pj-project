@@ -218,6 +218,12 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-one</artifactId>
+                <version>4.7.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -228,6 +234,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>ruoyi-one</module>
     </modules>
     <packaging>pom</packaging>
 
