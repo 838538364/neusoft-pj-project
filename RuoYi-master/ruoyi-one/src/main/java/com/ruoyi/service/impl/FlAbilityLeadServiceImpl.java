@@ -1,6 +1,7 @@
 package com.ruoyi.service.impl;
 
 import java.util.List;
+
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,4 +95,5 @@ public class FlAbilityLeadServiceImpl implements IFlAbilityLeadService
     {
         return flAbilityLeadMapper.deleteFlAbilityLeadById(id);
     }
+
 }

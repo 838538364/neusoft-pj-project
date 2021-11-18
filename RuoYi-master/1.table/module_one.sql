@@ -20,6 +20,8 @@ drop table if exists ptm_edu_socco_Industrial;
 
 drop table if exists ptm_edu_teach;
 
+drop table if exists ptm_edu_thesis_guidance;
+
 /*==============================================================*/
 /* Table: fl_ability_division                                   */
 /*==============================================================*/
@@ -118,6 +120,7 @@ alter table fl_tcp_paper comment '1.2.3-3毕业论文统计表(fl_tcp_paper)';
 /*==============================================================*/
 create table ptm_edu_guided
 (
+   id                   int not null auto_increment comment '序号',
    emp_name             varchar(50) comment '指导教师',
    highest_education    varchar(50) comment '学历',
    major                varchar(50) comment '专业',
@@ -126,7 +129,6 @@ create table ptm_edu_guided
    cla                  varchar(50) comment '班级',
    stu_id               varchar(50) comment '学号',
    stu_name             varchar(50) comment '姓名',
-   id                   int not null auto_increment comment '序号',
    create_by            varchar(50) comment '创建人',
    create_time          datetime comment '创建时间',
    update_by            varchar(50) comment '更新人',
@@ -216,3 +218,24 @@ create table ptm_edu_teach
 
 alter table ptm_edu_teach comment '各学院聘请企业人员授课情况表';
 
+
+create table ptm_edu_thesis_guidance
+(
+   id                   int not null auto_increment comment '序号',
+   thesis_title         varchar(50) comment '论文(设计)题目',
+   cla                  varchar(50) comment '班级',
+   stu_id       varchar(50) comment '学号',
+   stu_name             varchar(50) comment '作者',
+   major                varchar(50) comment '专业',
+   emp_name             date comment '指导老师(企业方)',
+   address              varchar(50) comment '所在单位',
+   use_status           char(2) comment '是否使用',
+   create_by            varchar(50) comment '创建人',
+   create_time          datetime comment '创建时间',
+   update_by            varchar(50) comment '更新人',
+   update_time          datetime comment '更新时间',
+   remark               varchar(128) comment '备注',
+   primary key (id)
+);
+
+alter table ptm_edu_thesis_guidance comment '各学院聘请企业人员指导毕业论文情况统计表';
