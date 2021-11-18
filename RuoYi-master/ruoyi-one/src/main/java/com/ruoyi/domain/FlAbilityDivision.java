@@ -35,7 +35,7 @@ public class FlAbilityDivision extends BaseEntity
     private String division;
 
     /** 是否使用 */
-    @Excel(name = "是否使用")
+
     private String useStatus;
 
     public void setId(Long id) 
