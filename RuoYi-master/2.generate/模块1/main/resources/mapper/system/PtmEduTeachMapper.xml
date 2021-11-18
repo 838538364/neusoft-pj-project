@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.PtmEduTeachMapper">
+    
+    <resultMap type="PtmEduTeach" id="PtmEduTeachResult">
+        <result property="id"    column="id"    />
+        <result property="college"    column="college"    />
+        <result property="name"    column="name"    />
+        <result property="title"    column="title"    />
+        <result property="workTime"    column="work_time"    />
+        <result property="year"    column="year"    />
+        <result property="courseCode"    column="course_code"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="teachObject"    column="teach_object"    />
+        <result property="teachNumber"    column="teach_number"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPtmEduTeachVo">
+        select id, college, name, title, work_time, year, course_code, course_name, teach_object, teach_number, use_status, create_by, create_time, update_by, update_time, remark from ptm_edu_teach
+    </sql>
+
+    <select id="selectPtmEduTeachList" parameterType="PtmEduTeach" resultMap="PtmEduTeachResult">
+        <include refid="selectPtmEduTeachVo"/>
+        <where>  
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectPtmEduTeachById" parameterType="Long" resultMap="PtmEduTeachResult">
+        <include refid="selectPtmEduTeachVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPtmEduTeach" parameterType="PtmEduTeach" useGeneratedKeys="true" keyProperty="id">
+        insert into ptm_edu_teach
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="college != null">college,</if>
+            <if test="name != null">name,</if>
+            <if test="title != null">title,</if>
+            <if test="workTime != null">work_time,</if>
+            <if test="year != null">year,</if>
+            <if test="courseCode != null">course_code,</if>
+            <if test="courseName != null">course_name,</if>
+            <if test="teachObject != null">teach_object,</if>
+            <if test="teachNumber != null">teach_number,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="college != null">#{college},</if>
+            <if test="name != null">#{name},</if>
+            <if test="title != null">#{title},</if>
+            <if test="workTime != null">#{workTime},</if>
+            <if test="year != null">#{year},</if>
+            <if test="courseCode != null">#{courseCode},</if>
+            <if test="courseName != null">#{courseName},</if>
+            <if test="teachObject != null">#{teachObject},</if>
+            <if test="teachNumber != null">#{teachNumber},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePtmEduTeach" parameterType="PtmEduTeach">
+        update ptm_edu_teach
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="college != null">college = #{college},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="workTime != null">work_time = #{workTime},</if>
+            <if test="year != null">year = #{year},</if>
+            <if test="courseCode != null">course_code = #{courseCode},</if>
+            <if test="courseName != null">course_name = #{courseName},</if>
+            <if test="teachObject != null">teach_object = #{teachObject},</if>
+            <if test="teachNumber != null">teach_number = #{teachNumber},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePtmEduTeachById" parameterType="Long">
+        delete from ptm_edu_teach where id = #{id}
+    </delete>
+
+    <delete id="deletePtmEduTeachByIds" parameterType="String">
+        delete from ptm_edu_teach where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FlAbilityLeadMapper">
+    
+    <resultMap type="FlAbilityLead" id="FlAbilityLeadResult">
+        <result property="id"    column="id"    />
+        <result property="empId"    column="emp_id"    />
+        <result property="empName"    column="emp_name"    />
+        <result property="sex"    column="sex"    />
+        <result property="post"    column="post"    />
+        <result property="wordTime"    column="word_time"    />
+        <result property="highestEducation"    column="highest_education"    />
+        <result property="title"    column="title"    />
+        <result property="resume"    column="resume"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFlAbilityLeadVo">
+        select id, emp_id, emp_name, sex, post, word_time, highest_education, title, resume, use_status, create_by, create_time, update_by, update_time, remark from fl_ability_lead
+    </sql>
+
+    <select id="selectFlAbilityLeadList" parameterType="FlAbilityLead" resultMap="FlAbilityLeadResult">
+        <include refid="selectFlAbilityLeadVo"/>
+        <where>  
+            <if test="empId != null  and empId != ''"> and emp_id = #{empId}</if>
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFlAbilityLeadById" parameterType="Long" resultMap="FlAbilityLeadResult">
+        <include refid="selectFlAbilityLeadVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFlAbilityLead" parameterType="FlAbilityLead" useGeneratedKeys="true" keyProperty="id">
+        insert into fl_ability_lead
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empId != null and empId != ''">emp_id,</if>
+            <if test="empName != null and empName != ''">emp_name,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="post != null and post != ''">post,</if>
+            <if test="wordTime != null">word_time,</if>
+            <if test="highestEducation != null and highestEducation != ''">highest_education,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="resume != null and resume != ''">resume,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empId != null and empId != ''">#{empId},</if>
+            <if test="empName != null and empName != ''">#{empName},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="post != null and post != ''">#{post},</if>
+            <if test="wordTime != null">#{wordTime},</if>
+            <if test="highestEducation != null and highestEducation != ''">#{highestEducation},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="resume != null and resume != ''">#{resume},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFlAbilityLead" parameterType="FlAbilityLead">
+        update fl_ability_lead
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="empId != null and empId != ''">emp_id = #{empId},</if>
+            <if test="empName != null and empName != ''">emp_name = #{empName},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="post != null and post != ''">post = #{post},</if>
+            <if test="wordTime != null">word_time = #{wordTime},</if>
+            <if test="highestEducation != null and highestEducation != ''">highest_education = #{highestEducation},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="resume != null and resume != ''">resume = #{resume},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFlAbilityLeadById" parameterType="Long">
+        delete from fl_ability_lead where id = #{id}
+    </delete>
+
+    <delete id="deleteFlAbilityLeadByIds" parameterType="String">
+        delete from fl_ability_lead where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

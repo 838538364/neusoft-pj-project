@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.PtmEduPtStatisticsMapper">
+    
+    <resultMap type="PtmEduPtStatistics" id="PtmEduPtStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="company"    column="company"    />
+        <result property="province"    column="province"    />
+        <result property="manager"    column="manager"    />
+        <result property="ipName"    column="ip_name"    />
+        <result property="proName"    column="pro_name"    />
+        <result property="courseHours"    column="course_hours"    />
+        <result property="empName"    column="emp_name"    />
+        <result property="numberStudent"    column="number_student"    />
+        <result property="practiceType"    column="practice_type"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPtmEduPtStatisticsVo">
+        select id, company, province, manager, ip_name, pro_name, course_hours, emp_name, number_student, practice_type, use_status, create_by, create_time, update_by, update_time, remark from ptm_edu_pt_statistics
+    </sql>
+
+    <select id="selectPtmEduPtStatisticsList" parameterType="PtmEduPtStatistics" resultMap="PtmEduPtStatisticsResult">
+        <include refid="selectPtmEduPtStatisticsVo"/>
+        <where>  
+            <if test="manager != null  and manager != ''"> and manager = #{manager}</if>
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectPtmEduPtStatisticsById" parameterType="Long" resultMap="PtmEduPtStatisticsResult">
+        <include refid="selectPtmEduPtStatisticsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPtmEduPtStatistics" parameterType="PtmEduPtStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into ptm_edu_pt_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="company != null">company,</if>
+            <if test="province != null">province,</if>
+            <if test="manager != null">manager,</if>
+            <if test="ipName != null">ip_name,</if>
+            <if test="proName != null">pro_name,</if>
+            <if test="courseHours != null">course_hours,</if>
+            <if test="empName != null">emp_name,</if>
+            <if test="numberStudent != null">number_student,</if>
+            <if test="practiceType != null">practice_type,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="company != null">#{company},</if>
+            <if test="province != null">#{province},</if>
+            <if test="manager != null">#{manager},</if>
+            <if test="ipName != null">#{ipName},</if>
+            <if test="proName != null">#{proName},</if>
+            <if test="courseHours != null">#{courseHours},</if>
+            <if test="empName != null">#{empName},</if>
+            <if test="numberStudent != null">#{numberStudent},</if>
+            <if test="practiceType != null">#{practiceType},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePtmEduPtStatistics" parameterType="PtmEduPtStatistics">
+        update ptm_edu_pt_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="company != null">company = #{company},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="manager != null">manager = #{manager},</if>
+            <if test="ipName != null">ip_name = #{ipName},</if>
+            <if test="proName != null">pro_name = #{proName},</if>
+            <if test="courseHours != null">course_hours = #{courseHours},</if>
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="numberStudent != null">number_student = #{numberStudent},</if>
+            <if test="practiceType != null">practice_type = #{practiceType},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePtmEduPtStatisticsById" parameterType="Long">
+        delete from ptm_edu_pt_statistics where id = #{id}
+    </delete>
+
+    <delete id="deletePtmEduPtStatisticsByIds" parameterType="String">
+        delete from ptm_edu_pt_statistics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,6 +1,8 @@
 # neusoft-pj-project
 计算机学院专业建设自评管理系统，项目开发一组的代码仓库
 
+使用ruoyi脚手架开发，在此基础上实现自己的业务需求
+
 <br>
 
 <br>
@@ -60,6 +62,6 @@ com.ruoyi
 ├── ruoyi-quartz      // 定时任务（不用可移除）
 ├── ruoyi-system      // 系统代码
 ├── ruoyi-admin       // 后台服务
-├── todo...
+├── ruoyi-one    // 模块一开发
 ```
 
