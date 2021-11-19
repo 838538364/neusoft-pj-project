@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.one;
 
 import java.util.List;
+
+import com.ruoyi.domain.FlAbilityLead;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 1.2.2-2学校领导分工一览Controller
@@ -67,6 +70,26 @@ public class FlAbilityDivisionController extends BaseController
         ExcelUtil<FlAbilityDivision> util = new ExcelUtil<FlAbilityDivision>(FlAbilityDivision.class);
         return util.exportExcel(list, "division");
     }
+
+
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        // 改成自己的实体类
+        ExcelUtil<FlAbilityDivision> util = new ExcelUtil<FlAbilityDivision>(FlAbilityDivision.class);
+        List<FlAbilityDivision> userList = util.importExcel(file.getInputStream());
+
+        // 遍历插入
+        for (int i = 0; i < userList.size(); i++) {
+            // 把每条数据插入到数据库
+            FlAbilityDivision division = userList.get(i);
+            flAbilityDivisionService.insertFlAbilityDivision(division);
+        }
+
+        return AjaxResult.success();
+    }
+
 
     /**
      * 新增1.2.2-2学校领导分工一览
