@@ -43,8 +43,6 @@ public class FlTcpLecture extends BaseEntity
     @Excel(name = "职称")
     private String title;
 
-    /** 是否使用 */
-    @Excel(name = "是否使用")
     private String useStatus;
 
     public void setId(Long id) 

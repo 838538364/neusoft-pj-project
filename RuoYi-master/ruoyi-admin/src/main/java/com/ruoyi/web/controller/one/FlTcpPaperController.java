@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.one;
 
 import java.util.List;
+
+import com.ruoyi.domain.FlTcpLecture;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 1.2.3-3毕业论文统计(fl_tcp_paper)Controller
@@ -98,6 +101,24 @@ public class FlTcpPaperController extends BaseController
         FlTcpPaper flTcpPaper = flTcpPaperService.selectFlTcpPaperById(id);
         mmap.put("flTcpPaper", flTcpPaper);
         return prefix + "/edit";
+    }
+
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        // 改成自己的实体类
+        ExcelUtil<FlTcpPaper> util = new ExcelUtil<FlTcpPaper>(FlTcpPaper.class);
+        List<FlTcpPaper> userList = util.importExcel(file.getInputStream());
+
+        // 遍历插入
+        for (int i = 0; i < userList.size(); i++) {
+            // 把每条数据插入到数据库
+            FlTcpPaper paper = userList.get(i);
+            flTcpPaperService.insertFlTcpPaper(paper);
+        }
+
+        return AjaxResult.success();
     }
 
     /**

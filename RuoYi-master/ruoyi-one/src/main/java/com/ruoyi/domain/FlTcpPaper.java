@@ -46,8 +46,7 @@ public class FlTcpPaper extends BaseEntity
     @Excel(name = "科研项目名称")
     private String projectName;
 
-    /** 是否使用 */
-    @Excel(name = "是否使用")
+
     private String useStatus;
 
     public void setId(Long id) 
