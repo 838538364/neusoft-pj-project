@@ -82,7 +82,6 @@ public class FlAbilityLeadController extends BaseController
         for (int i = 0; i < userList.size(); i++) {
             // 把每条数据插入到数据库
             FlAbilityLead lead = userList.get(i);
-            lead.setUseStatus("1");
             flAbilityLeadService.insertFlAbilityLead(lead);
         }
         
