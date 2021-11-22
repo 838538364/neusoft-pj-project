@@ -27,215 +27,215 @@ drop table if exists ptm_edu_thesis_guidance;
 /*==============================================================*/
 create table fl_ability_division
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   emp_id               varchar(50) not null comment '¹¤ºÅ',
-   emp_name             varchar(60) not null comment 'Ö°¹¤ÐÕÃû',
-   post                 varchar(100) not null comment 'Ö°Îñ',
-   division             varchar(500) not null comment '·Ö¹¤',
-   use_status           char(2) not null comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   emp_id               varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½',
+   emp_name             varchar(60) not null comment 'Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   post                 varchar(100) not null comment 'Ö°ï¿½ï¿½',
+   division             varchar(500) not null comment 'ï¿½Ö¹ï¿½',
+   use_status           char(2)  comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table fl_ability_division comment '1.2.2-2Ñ§Ð£Áìµ¼·Ö¹¤Ò»ÀÀ±í';
+alter table fl_ability_division comment '1.2.2-2Ñ§Ð£ï¿½ìµ¼ï¿½Ö¹ï¿½Ò»ï¿½ï¿½ï¿½ï¿½';
 
 /*==============================================================*/
 /* Table: fl_ability_lead                                       */
 /*==============================================================*/
 create table fl_ability_lead
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   emp_id               varchar(50) not null comment '¹¤ºÅ',
-   emp_name             varchar(60) not null comment 'Ö°¹¤ÐÕÃû',
-   sex                  char(2) not null comment 'ÐÔ±ð',
-   post                 varchar(100) not null comment 'Ö°Îñ',
-   word_time            datetime not null comment 'ÈÎÖ°Ê±¼ä',
-   highest_education    varchar(80) not null comment '×î¸ßÑ§Àú',
-   title                varchar(80) not null comment 'Ö°³Æ',
-   resume               varchar(200) not null comment '¸öÈË¼òÀú',
-   use_status           char(2) not null comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   emp_id               varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½',
+   emp_name             varchar(60) not null comment 'Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   sex                  char(2) not null comment 'ï¿½Ô±ï¿½',
+   post                 varchar(100) not null comment 'Ö°ï¿½ï¿½',
+   word_time            datetime not null comment 'ï¿½ï¿½Ö°Ê±ï¿½ï¿½',
+   highest_education    varchar(80) not null comment 'ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½',
+   title                varchar(80) not null comment 'Ö°ï¿½ï¿½',
+   resume               varchar(200) not null comment 'ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½',
+   use_status           char(2)  comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table fl_ability_lead comment '1.2.2-1Ñ§Ð£Áìµ¼Ò»ÀÀ±í';
+alter table fl_ability_lead comment '1.2.2-1Ñ§Ð£ï¿½ìµ¼Ò»ï¿½ï¿½ï¿½ï¿½';
 
 /*==============================================================*/
 /* Table: fl_tcp_lecture                                        */
 /*==============================================================*/
 create table fl_tcp_lecture
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   lecture_title        varchar(50) not null comment '½²×ùÖ÷Ìâ',
-   lecture_time         datetime not null comment '½²×ùÊ±¼ä',
-   stu_id               varchar(50) not null comment 'Ñ§ºÅ',
-   stu_name             varchar(50) not null comment 'Ñ§ÉúÐÕÃû',
-   emp_name             varchar(60) not null comment 'Ö°¹¤ÐÕÃû',
-   title                  varchar(50) not null comment 'Ö°³Æ',
-   use_status           char(2) not null comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   lecture_title        varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   lecture_time         datetime not null comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   stu_id               varchar(50) not null comment 'Ñ§ï¿½ï¿½',
+   stu_name             varchar(50) not null comment 'Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   emp_name             varchar(60) not null comment 'Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   title                  varchar(50) not null comment 'Ö°ï¿½ï¿½',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table fl_tcp_lecture comment '1.2.3-4 Ñ§Êõ½²×ù±í(fl_tcp_lecture)';
+alter table fl_tcp_lecture comment '1.2.3-4 Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(fl_tcp_lecture)';
 
 /*==============================================================*/
 /* Table: fl_tcp_paper                                          */
 /*==============================================================*/
 create table fl_tcp_paper
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   stu_id               varchar(50) not null comment 'Ñ§ºÅ',
-   stu_name             varchar(50) not null comment 'Ñ§ÉúÐÕÃû',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   stu_id               varchar(50) not null comment 'Ñ§ï¿½ï¿½',
+   stu_name             varchar(50) not null comment 'Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
    major                varchar(60) not null comment '×¨Òµ',
-   cla                  varchar(50) not null comment '°à¼¶',
-   teacher              varchar(50) not null comment 'Ö¸µ¼ÀÏÊ¦',
-   paper_title          varchar(50) not null comment 'ÂÛÎÄÌâÄ¿',
-   project_name         varchar(50) not null comment '¿ÆÑÐÏîÄ¿Ãû³Æ',
-   use_status           char(2) comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   cla                  varchar(50) not null comment 'ï¿½à¼¶',
+   teacher              varchar(50) not null comment 'Ö¸ï¿½ï¿½ï¿½ï¿½Ê¦',
+   paper_title          varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿',
+   project_name         varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table fl_tcp_paper comment '1.2.3-3±ÏÒµÂÛÎÄÍ³¼Æ±í(fl_tcp_paper)';
+alter table fl_tcp_paper comment '1.2.3-3ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ±ï¿½(fl_tcp_paper)';
 
 /*==============================================================*/
 /* Table: ptm_edu_guided                                        */
 /*==============================================================*/
 create table ptm_edu_guided
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   emp_name             varchar(50) comment 'Ö¸µ¼½ÌÊ¦',
-   highest_education    varchar(50) comment 'Ñ§Àú',
-   major                varchar(50) comment '×¨Òµ',
-   work_station         varchar(50) comment '¹¤×÷µ¥Î»',
-   teach_time           date comment 'Ö¸µ¼Ê±¼ä',
-   cla                  varchar(50) comment '°à¼¶',
-   stu_id               varchar(50) comment 'Ñ§ºÅ',
-   stu_name             varchar(50) comment 'ÐÕÃû',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   emp_name             varchar(50) not null comment 'Ö¸ï¿½ï¿½ï¿½ï¿½Ê¦',
+   highest_education    varchar(50) comment 'Ñ§ï¿½ï¿½',
+   major                varchar(50) not null comment '×¨Òµ',
+   work_station         varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»',
+   teach_time           date comment 'Ö¸ï¿½ï¿½Ê±ï¿½ï¿½',
+   cla                  varchar(50) comment 'ï¿½à¼¶',
+   stu_id               varchar(50) not null comment 'Ñ§ï¿½ï¿½',
+   stu_name             varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table ptm_edu_guided comment '¸÷Ñ§ÔºÆ¸ÇëÆóÒµÈËÔ±Ö¸µ¼ÊµÏ°Çé¿ö±í';
+alter table ptm_edu_guided comment 'ï¿½ï¿½Ñ§ÔºÆ¸ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ô±Ö¸ï¿½ï¿½ÊµÏ°ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 /*==============================================================*/
 /* Table: ptm_edu_pt_statistics                                 */
 /*==============================================================*/
 create table ptm_edu_pt_statistics
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   company              varchar(50) comment 'ÊµÏ°Êµ¼ùµ¥Î»Ãû³Æ',
-   province             varchar(50) comment 'ËùÔÚÊ¡ÊÐ',
-   manager              varchar(50) comment 'ÆóÒµÊµÏ°Êµ¼ù¸ºÔðÈË',
-   ip_name              varchar(50) comment 'ÊµÏ°Êµ¼ùÏîÄ¿Ãû³Æ',
-   pro_name             varchar(50) comment '²ÎÓëÊµ¼ù»î¶¯×¨ÒµÃû³Æ',
-   course_hours         date comment 'ÊµÏ°Êµ¼ùÊ±¼ä',
-   emp_name             varchar(50) comment 'Ð£ÄÚÖ¸µ¼½ÌÊ¦',
-   number_student       varchar(50) comment '²ÎÓëÑ§ÉúÈËÊý',
-   practice_type        varchar(50) comment 'Ö÷ÒªÊµÏ°Êµ¼ù·½Ê½',
-   use_status           char(2) comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   company              varchar(50) comment 'ÊµÏ°Êµï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½',
+   province             varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½',
+   manager              varchar(50) not null comment 'ï¿½ï¿½ÒµÊµÏ°Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   ip_name              varchar(50) not null comment 'ÊµÏ°Êµï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½',
+   pro_name             varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½î¶¯×¨Òµï¿½ï¿½ï¿½ï¿½',
+   course_hours         date comment 'ÊµÏ°Êµï¿½ï¿½Ê±ï¿½ï¿½',
+   emp_name             varchar(50) not null comment 'Ð£ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê¦',
+   number_student       varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   practice_type        varchar(50) comment 'ï¿½ï¿½ÒªÊµÏ°Êµï¿½ï¿½ï¿½ï¿½Ê½',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table ptm_edu_pt_statistics comment '¸÷×¨ÒµÐ£ÍâÊµ¼ù½ÌÑ§Çé¿öÍ³¼Æ±í';
+alter table ptm_edu_pt_statistics comment 'ï¿½ï¿½×¨ÒµÐ£ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½Í³ï¿½Æ±ï¿½';
 
 /*==============================================================*/
 /* Table: ptm_edu_socco_Industrial                              */
 /*==============================================================*/
 create table ptm_edu_socco_Industrial
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   college_name         varchar(50) comment '²úÒµÑ§ÔºÃû³Æ',
-   unit_industry     varchar(50) comment '¹²½¨µ¥Î»¼°ÐÐÒµÀà',
-   manager              varchar(50) comment '¸ºÔðÈË',
-   est_time             date comment '×é½¨Ê±¼ä',
-   cooperation_year     varchar(50) comment 'ºÏ×÷ÄêÏÞ',
-   personnel_training   varchar(50) comment 'ÈË²ÅÅàÑø',
-   construction_teacher varchar(50) comment 'Ê¦×Ê¶ÓÎé½¨Éè',
-   textbook_dev         varchar(50) comment '½Ì²Ä¿ª·¢',
-   laboratory           varchar(50) comment 'ÊµÑéÊÒÍ¶Èë',
-   other                varchar(50) comment 'ÆäËû',
-   use_status           char(2) comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   college_name         varchar(50) not null comment 'ï¿½ï¿½ÒµÑ§Ôºï¿½ï¿½ï¿½ï¿½',
+   unit_industry     varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½',
+   manager              varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   est_time             date comment 'ï¿½é½¨Ê±ï¿½ï¿½',
+   cooperation_year     varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   personnel_training   varchar(50) comment 'ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½',
+   construction_teacher varchar(50) comment 'Ê¦ï¿½Ê¶ï¿½ï¿½é½¨ï¿½ï¿½',
+   textbook_dev         varchar(50) comment 'ï¿½Ì²Ä¿ï¿½ï¿½ï¿½',
+   laboratory           varchar(50) comment 'Êµï¿½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½',
+   other                varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table ptm_edu_socco_Industrial comment '²úÒµÑ§Ôº¹²½¨Çé¿öÍ³¼ÆÀÀ±í';
+alter table ptm_edu_socco_Industrial comment 'ï¿½ï¿½ÒµÑ§Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 /*==============================================================*/
 /* Table: ptm_edu_teach                                         */
 /*==============================================================*/
 create table ptm_edu_teach
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   college              varchar(50) comment 'ËùÊôÑ§Ôº',
-   name                 varchar(50) comment 'ÐÕÃû',
-   title                varchar(50) comment 'Ö°³Æ',
-   work_time            date comment 'ÈÎÖ°Ê±¼ä',
-   year                 varchar(50) comment 'Ñ§ÄêÑ§ÆÚ',
-   course_code          varchar(50) comment '¿Î³Ì´úÂë',
-   course_name          varchar(50) comment '¿Î³ÌÃû³Æ',
-   teach_object         varchar(50) comment 'ÊÚ¿Î¶ÔÏó',
-   teach_number         varchar(50) comment 'ÊÚ¿ÎÈËÊý',
-   use_status           char(2) comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   college              varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½Ñ§Ôº',
+   name                 varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½',
+   title                varchar(50) comment 'Ö°ï¿½ï¿½',
+   work_time            date comment 'ï¿½ï¿½Ö°Ê±ï¿½ï¿½',
+   year                 varchar(50) comment 'Ñ§ï¿½ï¿½Ñ§ï¿½ï¿½',
+   course_code          varchar(50) not null comment 'ï¿½Î³Ì´ï¿½ï¿½ï¿½',
+   course_name          varchar(50) not null comment 'ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½',
+   teach_object         varchar(50) comment 'ï¿½Ú¿Î¶ï¿½ï¿½ï¿½',
+   teach_number         varchar(50) comment 'ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table ptm_edu_teach comment '¸÷Ñ§ÔºÆ¸ÇëÆóÒµÈËÔ±ÊÚ¿ÎÇé¿ö±í';
+alter table ptm_edu_teach comment 'ï¿½ï¿½Ñ§ÔºÆ¸ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ô±ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 
 create table ptm_edu_thesis_guidance
 (
-   id                   int not null auto_increment comment 'ÐòºÅ',
-   thesis_title         varchar(50) comment 'ÂÛÎÄ(Éè¼Æ)ÌâÄ¿',
-   cla                  varchar(50) comment '°à¼¶',
-   stu_id       varchar(50) comment 'Ñ§ºÅ',
-   stu_name             varchar(50) comment '×÷Õß',
-   major                varchar(50) comment '×¨Òµ',
-   emp_name             date comment 'Ö¸µ¼ÀÏÊ¦(ÆóÒµ·½)',
-   address              varchar(50) comment 'ËùÔÚµ¥Î»',
-   use_status           char(2) comment 'ÊÇ·ñÊ¹ÓÃ',
-   create_by            varchar(50) comment '´´½¨ÈË',
-   create_time          datetime comment '´´½¨Ê±¼ä',
-   update_by            varchar(50) comment '¸üÐÂÈË',
-   update_time          datetime comment '¸üÐÂÊ±¼ä',
-   remark               varchar(128) comment '±¸×¢',
+   id                   int not null auto_increment comment 'ï¿½ï¿½ï¿½',
+   thesis_title         varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)ï¿½ï¿½Ä¿',
+   cla                  varchar(50) not null comment 'ï¿½à¼¶',
+   stu_id       varchar(50) not null comment 'Ñ§ï¿½ï¿½',
+   stu_name             varchar(50) not null comment 'ï¿½ï¿½ï¿½ï¿½',
+   major                varchar(50) not null comment '×¨Òµ',
+   emp_name             date not null comment 'Ö¸ï¿½ï¿½ï¿½ï¿½Ê¦(ï¿½ï¿½Òµï¿½ï¿½)',
+   address              varchar(50) comment 'ï¿½ï¿½ï¿½Úµï¿½Î»',
+   use_status           char(2) comment 'ï¿½Ç·ï¿½Ê¹ï¿½ï¿½',
+   create_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   create_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   update_by            varchar(50) comment 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+   update_time          datetime comment 'ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½',
+   remark               varchar(128) comment 'ï¿½ï¿½×¢',
    primary key (id)
 );
 
-alter table ptm_edu_thesis_guidance comment '¸÷Ñ§ÔºÆ¸ÇëÆóÒµÈËÔ±Ö¸µ¼±ÏÒµÂÛÎÄÇé¿öÍ³¼Æ±í';
+alter table ptm_edu_thesis_guidance comment 'ï¿½ï¿½Ñ§ÔºÆ¸ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ô±Ö¸ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ±ï¿½';
