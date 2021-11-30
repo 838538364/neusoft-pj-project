@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MoralCharaOutstandingGraduateMapper">
+    
+    <resultMap type="MoralCharaOutstandingGraduate" id="MoralCharaOutstandingGraduateResult">
+        <result property="id"    column="id"    />
+        <result property="stuName"    column="stu_name"    />
+        <result property="stuId"    column="stu_id"    />
+        <result property="sex"    column="sex"    />
+        <result property="political"    column="political"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="major"    column="major"    />
+        <result property="className"    column="class_name"    />
+        <result property="year"    column="year"    />
+        <result property="teacherName"    column="teacher_name"    />
+        <result property="honoraryName"    column="honorary_name"    />
+        <result property="commendUnit"    column="commend_unit"    />
+        <result property="commendTime"    column="commend_time"    />
+        <result property="isReport"    column="is_report"    />
+        <result property="other"    column="other"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectMoralCharaOutstandingGraduateVo">
+        select id, stu_name, stu_id, sex, political, college_name, major, class_name, year, teacher_name, honorary_name, commend_unit, commend_time, is_report, other, use_status, create_by, create_time, update_by, update_time, remark from moral_chara_outstanding_graduate
+    </sql>
+
+    <select id="selectMoralCharaOutstandingGraduateList" parameterType="MoralCharaOutstandingGraduate" resultMap="MoralCharaOutstandingGraduateResult">
+        <include refid="selectMoralCharaOutstandingGraduateVo"/>
+        <where>  
+            <if test="stuName != null  and stuName != ''"> and stu_name like concat('%', #{stuName}, '%')</if>
+            <if test="stuId != null  and stuId != ''"> and stu_id = #{stuId}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="political != null  and political != ''"> and political = #{political}</if>
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="className != null  and className != ''"> and class_name like concat('%', #{className}, '%')</if>
+            <if test="year != null  and year != ''"> and year = #{year}</if>
+            <if test="teacherName != null  and teacherName != ''"> and teacher_name like concat('%', #{teacherName}, '%')</if>
+            <if test="honoraryName != null  and honoraryName != ''"> and honorary_name like concat('%', #{honoraryName}, '%')</if>
+            <if test="commendUnit != null  and commendUnit != ''"> and commend_unit = #{commendUnit}</if>
+            <if test="commendTime != null "> and commend_time = #{commendTime}</if>
+            <if test="isReport != null  and isReport != ''"> and is_report = #{isReport}</if>
+            <if test="other != null  and other != ''"> and other = #{other}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectMoralCharaOutstandingGraduateById" parameterType="Long" resultMap="MoralCharaOutstandingGraduateResult">
+        <include refid="selectMoralCharaOutstandingGraduateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMoralCharaOutstandingGraduate" parameterType="MoralCharaOutstandingGraduate" useGeneratedKeys="true" keyProperty="id">
+        insert into moral_chara_outstanding_graduate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stuName != null">stu_name,</if>
+            <if test="stuId != null">stu_id,</if>
+            <if test="sex != null">sex,</if>
+            <if test="political != null">political,</if>
+            <if test="collegeName != null">college_name,</if>
+            <if test="major != null">major,</if>
+            <if test="className != null">class_name,</if>
+            <if test="year != null">year,</if>
+            <if test="teacherName != null">teacher_name,</if>
+            <if test="honoraryName != null">honorary_name,</if>
+            <if test="commendUnit != null">commend_unit,</if>
+            <if test="commendTime != null">commend_time,</if>
+            <if test="isReport != null">is_report,</if>
+            <if test="other != null">other,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stuName != null">#{stuName},</if>
+            <if test="stuId != null">#{stuId},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="political != null">#{political},</if>
+            <if test="collegeName != null">#{collegeName},</if>
+            <if test="major != null">#{major},</if>
+            <if test="className != null">#{className},</if>
+            <if test="year != null">#{year},</if>
+            <if test="teacherName != null">#{teacherName},</if>
+            <if test="honoraryName != null">#{honoraryName},</if>
+            <if test="commendUnit != null">#{commendUnit},</if>
+            <if test="commendTime != null">#{commendTime},</if>
+            <if test="isReport != null">#{isReport},</if>
+            <if test="other != null">#{other},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMoralCharaOutstandingGraduate" parameterType="MoralCharaOutstandingGraduate">
+        update moral_chara_outstanding_graduate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuName != null">stu_name = #{stuName},</if>
+            <if test="stuId != null">stu_id = #{stuId},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="political != null">political = #{political},</if>
+            <if test="collegeName != null">college_name = #{collegeName},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="className != null">class_name = #{className},</if>
+            <if test="year != null">year = #{year},</if>
+            <if test="teacherName != null">teacher_name = #{teacherName},</if>
+            <if test="honoraryName != null">honorary_name = #{honoraryName},</if>
+            <if test="commendUnit != null">commend_unit = #{commendUnit},</if>
+            <if test="commendTime != null">commend_time = #{commendTime},</if>
+            <if test="isReport != null">is_report = #{isReport},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMoralCharaOutstandingGraduateById" parameterType="Long">
+        delete from moral_chara_outstanding_graduate where id = #{id}
+    </delete>
+
+    <delete id="deleteMoralCharaOutstandingGraduateByIds" parameterType="String">
+        delete from moral_chara_outstanding_graduate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

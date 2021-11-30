@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeamStrHonoraryCertificateMapper">
+    
+    <resultMap type="TeamStrHonoraryCertificate" id="TeamStrHonoraryCertificateResult">
+        <result property="id"    column="id"    />
+        <result property="empName"    column="emp_name"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="honorName"    column="honor_name"    />
+        <result property="release"    column="release_"    />
+        <result property="level"    column="level_"    />
+        <result property="honorTime"    column="honor_time"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTeamStrHonoraryCertificateVo">
+        select id, emp_name, dept_name, honor_name, release_, level_, honor_time, use_status, create_by, create_time, update_by, update_time, remark from team_str_honorary_certificate
+    </sql>
+
+    <select id="selectTeamStrHonoraryCertificateList" parameterType="TeamStrHonoraryCertificate" resultMap="TeamStrHonoraryCertificateResult">
+        <include refid="selectTeamStrHonoraryCertificateVo"/>
+        <where>  
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="honorName != null  and honorName != ''"> and honor_name like concat('%', #{honorName}, '%')</if>
+            <if test="release != null  and release != ''"> and release_ = #{release}</if>
+            <if test="level != null  and level != ''"> and level_ = #{level}</if>
+            <if test="honorTime != null "> and honor_time = #{honorTime}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectTeamStrHonoraryCertificateById" parameterType="Long" resultMap="TeamStrHonoraryCertificateResult">
+        <include refid="selectTeamStrHonoraryCertificateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTeamStrHonoraryCertificate" parameterType="TeamStrHonoraryCertificate" useGeneratedKeys="true" keyProperty="id">
+        insert into team_str_honorary_certificate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empName != null">emp_name,</if>
+            <if test="deptName != null">dept_name,</if>
+            <if test="honorName != null">honor_name,</if>
+            <if test="release != null">release_,</if>
+            <if test="level != null">level_,</if>
+            <if test="honorTime != null">honor_time,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empName != null">#{empName},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="honorName != null">#{honorName},</if>
+            <if test="release != null">#{release},</if>
+            <if test="level != null">#{level},</if>
+            <if test="honorTime != null">#{honorTime},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTeamStrHonoraryCertificate" parameterType="TeamStrHonoraryCertificate">
+        update team_str_honorary_certificate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="deptName != null">dept_name = #{deptName},</if>
+            <if test="honorName != null">honor_name = #{honorName},</if>
+            <if test="release != null">release_ = #{release},</if>
+            <if test="level != null">level_ = #{level},</if>
+            <if test="honorTime != null">honor_time = #{honorTime},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTeamStrHonoraryCertificateById" parameterType="Long">
+        delete from team_str_honorary_certificate where id = #{id}
+    </delete>
+
+    <delete id="deleteTeamStrHonoraryCertificateByIds" parameterType="String">
+        delete from team_str_honorary_certificate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

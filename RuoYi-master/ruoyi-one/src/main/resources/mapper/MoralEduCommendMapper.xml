@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MoralEduCommendMapper">
+    
+    <resultMap type="MoralEduCommend" id="MoralEduCommendResult">
+        <result property="id"    column="id"    />
+        <result property="time"    column="time"    />
+        <result property="stuName"    column="stu_name"    />
+        <result property="sex"    column="sex"    />
+        <result property="marjor"    column="marjor"    />
+        <result property="eduLevel"    column="edu_level"    />
+        <result property="fiveFour"    column="five_four"    />
+        <result property="sevenOne"    column="seven_one"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectMoralEduCommendVo">
+        select id, time, stu_name, sex, marjor, edu_level, five_four, seven_one, use_status, create_by, create_time, update_by, update_time, remark from moral_edu_commend
+    </sql>
+
+    <select id="selectMoralEduCommendList" parameterType="MoralEduCommend" resultMap="MoralEduCommendResult">
+        <include refid="selectMoralEduCommendVo"/>
+        <where>  
+            <if test="time != null "> and time = #{time}</if>
+            <if test="stuName != null  and stuName != ''"> and stu_name like concat('%', #{stuName}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="marjor != null  and marjor != ''"> and marjor = #{marjor}</if>
+            <if test="eduLevel != null  and eduLevel != ''"> and edu_level = #{eduLevel}</if>
+            <if test="fiveFour != null  and fiveFour != ''"> and five_four = #{fiveFour}</if>
+            <if test="sevenOne != null  and sevenOne != ''"> and seven_one = #{sevenOne}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectMoralEduCommendById" parameterType="Long" resultMap="MoralEduCommendResult">
+        <include refid="selectMoralEduCommendVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMoralEduCommend" parameterType="MoralEduCommend" useGeneratedKeys="true" keyProperty="id">
+        insert into moral_edu_commend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">time,</if>
+            <if test="stuName != null">stu_name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="marjor != null">marjor,</if>
+            <if test="eduLevel != null">edu_level,</if>
+            <if test="fiveFour != null">five_four,</if>
+            <if test="sevenOne != null">seven_one,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">#{time},</if>
+            <if test="stuName != null">#{stuName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="marjor != null">#{marjor},</if>
+            <if test="eduLevel != null">#{eduLevel},</if>
+            <if test="fiveFour != null">#{fiveFour},</if>
+            <if test="sevenOne != null">#{sevenOne},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMoralEduCommend" parameterType="MoralEduCommend">
+        update moral_edu_commend
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="time != null">time = #{time},</if>
+            <if test="stuName != null">stu_name = #{stuName},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="marjor != null">marjor = #{marjor},</if>
+            <if test="eduLevel != null">edu_level = #{eduLevel},</if>
+            <if test="fiveFour != null">five_four = #{fiveFour},</if>
+            <if test="sevenOne != null">seven_one = #{sevenOne},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMoralEduCommendById" parameterType="Long">
+        delete from moral_edu_commend where id = #{id}
+    </delete>
+
+    <delete id="deleteMoralEduCommendByIds" parameterType="String">
+        delete from moral_edu_commend where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

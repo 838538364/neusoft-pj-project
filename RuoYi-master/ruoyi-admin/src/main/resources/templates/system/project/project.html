@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('4.3.2-3实践学期项目汇总列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,32 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>姓名：</label>
+                                <label>开课学院：</label>
+                                <input type="text" name="college"/>
+                            </li>
+                            <li>
+                                <label>项目编号：</label>
+                                <input type="text" name="projectId"/>
+                            </li>
+                            <li>
+                                <label>项目名称：</label>
+                                <input type="text" name="projectName"/>
+                            </li>
+                            <li>
+                                <label>指导老师：</label>
                                 <input type="text" name="empName"/>
                             </li>
                             <li>
-                                <label>性别：</label>
-                                <select name="sex">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                <label>面向年级：</label>
+                                <input type="text" name="grade"/>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>面向专业：</label>
+                                <input type="text" name="major"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
-                            </li>
-                            <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
-                            </li>
-                            <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>所在单位：</label>
+                                <input type="text" name="stuNum"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +55,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:project:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:project:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:project:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:project:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +75,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:project:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:project:remove')}]];
+        var prefix = ctx + "system/project";
 
         $(function() {
             var options = {
@@ -85,7 +86,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "4.3.2-3实践学期项目汇总",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +96,32 @@
                     visible: false
                 },
                 {
+                    field: 'college',
+                    title: '开课学院'
+                },
+                {
+                    field: 'projectId',
+                    title: '项目编号'
+                },
+                {
+                    field: 'projectName',
+                    title: '项目名称'
+                },
+                {
                     field: 'empName',
-                    title: '姓名'
+                    title: '指导老师'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'grade',
+                    title: '面向年级'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'major',
+                    title: '面向专业'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
-                },
-                {
-                    field: 'post',
-                    title: '职务'
-                },
-                {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'stuNum',
+                    title: '所在单位'
                 },
                 {
                     field: 'useStatus',

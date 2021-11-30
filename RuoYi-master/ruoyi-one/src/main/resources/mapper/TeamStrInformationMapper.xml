@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeamStrInformationMapper">
+    
+    <resultMap type="TeamStrInformation" id="TeamStrInformationResult">
+        <result property="id"    column="id"    />
+        <result property="empName"    column="emp_name"    />
+        <result property="sex"    column="sex"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="idcard"    column="idcard"    />
+        <result property="highestEducation"    column="highest_education"    />
+        <result property="highestDegree"    column="highest_degree"    />
+        <result property="tel"    column="tel"    />
+        <result property="department"    column="department"    />
+        <result property="post"    column="post"    />
+        <result property="adminLevel"    column="admin_level"    />
+        <result property="workTime"    column="work_time"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTeamStrInformationVo">
+        select id, emp_name, sex, dept_id, idcard, highest_education, highest_degree, tel, department, post, admin_level, work_time, use_status, create_by, create_time, update_by, update_time, remark from team_str_information
+    </sql>
+
+    <select id="selectTeamStrInformationList" parameterType="TeamStrInformation" resultMap="TeamStrInformationResult">
+        <include refid="selectTeamStrInformationVo"/>
+        <where>  
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+            <if test="idcard != null  and idcard != ''"> and idcard = #{idcard}</if>
+            <if test="highestEducation != null  and highestEducation != ''"> and highest_education = #{highestEducation}</if>
+            <if test="highestDegree != null  and highestDegree != ''"> and highest_degree = #{highestDegree}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="post != null  and post != ''"> and post = #{post}</if>
+            <if test="adminLevel != null  and adminLevel != ''"> and admin_level = #{adminLevel}</if>
+            <if test="workTime != null "> and work_time = #{workTime}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectTeamStrInformationById" parameterType="Long" resultMap="TeamStrInformationResult">
+        <include refid="selectTeamStrInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTeamStrInformation" parameterType="TeamStrInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into team_str_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empName != null">emp_name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="idcard != null">idcard,</if>
+            <if test="highestEducation != null">highest_education,</if>
+            <if test="highestDegree != null">highest_degree,</if>
+            <if test="tel != null">tel,</if>
+            <if test="department != null">department,</if>
+            <if test="post != null">post,</if>
+            <if test="adminLevel != null">admin_level,</if>
+            <if test="workTime != null">work_time,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empName != null">#{empName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="idcard != null">#{idcard},</if>
+            <if test="highestEducation != null">#{highestEducation},</if>
+            <if test="highestDegree != null">#{highestDegree},</if>
+            <if test="tel != null">#{tel},</if>
+            <if test="department != null">#{department},</if>
+            <if test="post != null">#{post},</if>
+            <if test="adminLevel != null">#{adminLevel},</if>
+            <if test="workTime != null">#{workTime},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTeamStrInformation" parameterType="TeamStrInformation">
+        update team_str_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="idcard != null">idcard = #{idcard},</if>
+            <if test="highestEducation != null">highest_education = #{highestEducation},</if>
+            <if test="highestDegree != null">highest_degree = #{highestDegree},</if>
+            <if test="tel != null">tel = #{tel},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="post != null">post = #{post},</if>
+            <if test="adminLevel != null">admin_level = #{adminLevel},</if>
+            <if test="workTime != null">work_time = #{workTime},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTeamStrInformationById" parameterType="Long">
+        delete from team_str_information where id = #{id}
+    </delete>
+
+    <delete id="deleteTeamStrInformationByIds" parameterType="String">
+        delete from team_str_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

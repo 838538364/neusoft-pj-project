@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改5.1.1-1 学院教学管理职责分工一览')" />
+    <th:block th:include="include :: header('修改4.3.2-11 专业实习基地一览及协议')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-division-edit" th:object="${teamStrDivision}">
+        <form class="form-horizontal m" id="form-internship-edit" th:object="${teachPraInternship}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">姓名：</label>
+                <label class="col-sm-3 control-label">实习基地名称：</label>
                 <div class="col-sm-8">
-                    <input name="empName" th:field="*{empName}" class="form-control" type="text">
+                    <input name="baseName" th:field="*{baseName}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">性别：</label>
+                <label class="col-sm-3 control-label">面向专业：</label>
                 <div class="col-sm-8">
-                    <select name="sex" class="form-control m-b">
+                    <input name="major" th:field="*{major}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">基地类型：</label>
+                <div class="col-sm-8">
+                    <select name="baseType" class="form-control m-b">
                         <option value="">所有</option>
                     </select>
                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">部门：</label>
+                <label class="col-sm-3 control-label">详细地址：</label>
                 <div class="col-sm-8">
-                    <input name="deptId" th:field="*{deptId}" class="form-control" type="text">
+                    <input name="address" th:field="*{address}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">系部：</label>
+                <label class="col-sm-3 control-label">基地距学校距离：</label>
                 <div class="col-sm-8">
-                    <input name="department" th:field="*{department}" class="form-control" type="text">
+                    <input name="baseDistance" th:field="*{baseDistance}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">职务：</label>
+                <label class="col-sm-3 control-label">合作方联系人：</label>
                 <div class="col-sm-8">
-                    <input name="post" th:field="*{post}" class="form-control" type="text">
+                    <input name="partner" th:field="*{partner}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">工作职业：</label>
+                <label class="col-sm-3 control-label">合作方联系人电话：</label>
                 <div class="col-sm-8">
-                    <input name="job" th:field="*{job}" class="form-control" type="text">
+                    <input name="partnerTel" th:field="*{partnerTel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">协议书起止日期：</label>
+                <div class="col-sm-8">
+                    <input name="practiceTime" th:field="*{practiceTime}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -66,14 +78,14 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var prefix = ctx + "system/division";
-        $("#form-division-edit").validate({
+        var prefix = ctx + "system/internship";
+        $("#form-internship-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-division-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-internship-edit').serialize());
             }
         }
     </script>

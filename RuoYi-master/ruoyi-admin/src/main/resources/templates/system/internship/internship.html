@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('4.3.2-11 专业实习基地一览及协议列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,39 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>姓名：</label>
-                                <input type="text" name="empName"/>
+                                <label>实习基地名称：</label>
+                                <input type="text" name="baseName"/>
                             </li>
                             <li>
-                                <label>性别：</label>
-                                <select name="sex">
+                                <label>面向专业：</label>
+                                <input type="text" name="major"/>
+                            </li>
+                            <li>
+                                <label>基地类型：</label>
+                                <select name="baseType">
                                     <option value="">所有</option>
                                     <option value="-1">代码生成请选择字典属性</option>
                                 </select>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>详细地址：</label>
+                                <input type="text" name="address"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>基地距学校距离：</label>
+                                <input type="text" name="baseDistance"/>
                             </li>
                             <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
+                                <label>合作方联系人：</label>
+                                <input type="text" name="partner"/>
                             </li>
                             <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>合作方联系人电话：</label>
+                                <input type="text" name="partnerTel"/>
+                            </li>
+                            <li>
+                                <label>协议书起止日期：</label>
+                                <input type="text" name="practiceTime"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +62,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:internship:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:internship:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:internship:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:internship:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +82,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:internship:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:internship:remove')}]];
+        var prefix = ctx + "system/internship";
 
         $(function() {
             var options = {
@@ -85,7 +93,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "4.3.2-11 专业实习基地一览及协议",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +103,36 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
-                    title: '姓名'
+                    field: 'baseName',
+                    title: '实习基地名称'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'major',
+                    title: '面向专业'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'baseType',
+                    title: '基地类型'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
+                    field: 'address',
+                    title: '详细地址'
                 },
                 {
-                    field: 'post',
-                    title: '职务'
+                    field: 'baseDistance',
+                    title: '基地距学校距离'
                 },
                 {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'partner',
+                    title: '合作方联系人'
+                },
+                {
+                    field: 'partnerTel',
+                    title: '合作方联系人电话'
+                },
+                {
+                    field: 'practiceTime',
+                    title: '协议书起止日期'
                 },
                 {
                     field: 'useStatus',

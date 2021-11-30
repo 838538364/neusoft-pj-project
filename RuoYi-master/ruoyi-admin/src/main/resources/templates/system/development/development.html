@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('7.1.2-1 各专业党员发展计划、发展情况汇总列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,32 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>姓名：</label>
-                                <input type="text" name="empName"/>
+                                <label>所在支部：</label>
+                                <input type="text" name="collegeName"/>
                             </li>
                             <li>
-                                <label>性别：</label>
-                                <select name="sex">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                <label>已提交入党申请书数量：</label>
+                                <input type="text" name="submitNumber"/>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>现有入党积极分子存量：</label>
+                                <input type="text" name="activistNumber"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>拟发展时间：</label>
+                                <input type="text" name="developmentTime"/>
                             </li>
                             <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
+                                <label>拟发展计划数：</label>
+                                <input type="text" name="developmentNumber"/>
                             </li>
                             <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>现有党员数：</label>
+                                <input type="text" name="partyNumber"/>
+                            </li>
+                            <li>
+                                <label>其他：</label>
+                                <input type="text" name="other"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +55,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:development:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:development:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:development:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:development:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +75,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:development:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:development:remove')}]];
+        var prefix = ctx + "system/development";
 
         $(function() {
             var options = {
@@ -85,7 +86,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "7.1.2-1 各专业党员发展计划、发展情况汇总",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +96,32 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
-                    title: '姓名'
+                    field: 'collegeName',
+                    title: '所在支部'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'submitNumber',
+                    title: '已提交入党申请书数量'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'activistNumber',
+                    title: '现有入党积极分子存量'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
+                    field: 'developmentTime',
+                    title: '拟发展时间'
                 },
                 {
-                    field: 'post',
-                    title: '职务'
+                    field: 'developmentNumber',
+                    title: '拟发展计划数'
                 },
                 {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'partyNumber',
+                    title: '现有党员数'
+                },
+                {
+                    field: 'other',
+                    title: '其他'
                 },
                 {
                     field: 'useStatus',

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MoralEduOutstandingStudentsMapper">
+    
+    <resultMap type="MoralEduOutstandingStudents" id="MoralEduOutstandingStudentsResult">
+        <result property="id"    column="id"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="educationLevel"    column="education_level"    />
+        <result property="jobTitle"    column="job_title"    />
+        <result property="gradeProfessionalClass"    column="grade_professional_class"    />
+        <result property="honoraryTitle"    column="honorary_title"    />
+        <result property="recognitionTime"    column="recognition_time"    />
+        <result property="recognitionUnit"    column="recognition_unit"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectMoralEduOutstandingStudentsVo">
+        select id, college_name, name, sex, education_level, job_title, grade_professional_class, honorary_title, recognition_time, recognition_unit, use_status, create_by, create_time, update_by, update_time, remark from moral_edu_outstanding_students
+    </sql>
+
+    <select id="selectMoralEduOutstandingStudentsList" parameterType="MoralEduOutstandingStudents" resultMap="MoralEduOutstandingStudentsResult">
+        <include refid="selectMoralEduOutstandingStudentsVo"/>
+        <where>  
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="educationLevel != null  and educationLevel != ''"> and education_level = #{educationLevel}</if>
+            <if test="jobTitle != null  and jobTitle != ''"> and job_title = #{jobTitle}</if>
+            <if test="gradeProfessionalClass != null  and gradeProfessionalClass != ''"> and grade_professional_class = #{gradeProfessionalClass}</if>
+            <if test="honoraryTitle != null  and honoraryTitle != ''"> and honorary_title = #{honoraryTitle}</if>
+            <if test="recognitionTime != null  and recognitionTime != ''"> and recognition_time = #{recognitionTime}</if>
+            <if test="recognitionUnit != null  and recognitionUnit != ''"> and recognition_unit = #{recognitionUnit}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectMoralEduOutstandingStudentsById" parameterType="Long" resultMap="MoralEduOutstandingStudentsResult">
+        <include refid="selectMoralEduOutstandingStudentsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMoralEduOutstandingStudents" parameterType="MoralEduOutstandingStudents" useGeneratedKeys="true" keyProperty="id">
+        insert into moral_edu_outstanding_students
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null">college_name,</if>
+            <if test="name != null">name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="educationLevel != null">education_level,</if>
+            <if test="jobTitle != null">job_title,</if>
+            <if test="gradeProfessionalClass != null">grade_professional_class,</if>
+            <if test="honoraryTitle != null">honorary_title,</if>
+            <if test="recognitionTime != null">recognition_time,</if>
+            <if test="recognitionUnit != null">recognition_unit,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null">#{collegeName},</if>
+            <if test="name != null">#{name},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="educationLevel != null">#{educationLevel},</if>
+            <if test="jobTitle != null">#{jobTitle},</if>
+            <if test="gradeProfessionalClass != null">#{gradeProfessionalClass},</if>
+            <if test="honoraryTitle != null">#{honoraryTitle},</if>
+            <if test="recognitionTime != null">#{recognitionTime},</if>
+            <if test="recognitionUnit != null">#{recognitionUnit},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMoralEduOutstandingStudents" parameterType="MoralEduOutstandingStudents">
+        update moral_edu_outstanding_students
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collegeName != null">college_name = #{collegeName},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="educationLevel != null">education_level = #{educationLevel},</if>
+            <if test="jobTitle != null">job_title = #{jobTitle},</if>
+            <if test="gradeProfessionalClass != null">grade_professional_class = #{gradeProfessionalClass},</if>
+            <if test="honoraryTitle != null">honorary_title = #{honoraryTitle},</if>
+            <if test="recognitionTime != null">recognition_time = #{recognitionTime},</if>
+            <if test="recognitionUnit != null">recognition_unit = #{recognitionUnit},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMoralEduOutstandingStudentsById" parameterType="Long">
+        delete from moral_edu_outstanding_students where id = #{id}
+    </delete>
+
+    <delete id="deleteMoralEduOutstandingStudentsByIds" parameterType="String">
+        delete from moral_edu_outstanding_students where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

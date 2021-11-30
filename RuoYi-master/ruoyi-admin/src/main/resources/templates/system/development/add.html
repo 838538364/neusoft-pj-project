@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('新增5.1.1-1 学院教学管理职责分工一览')" />
+    <th:block th:include="include :: header('新增7.1.2-1 各专业党员发展计划、发展情况汇总')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-division-add">
+        <form class="form-horizontal m" id="form-development-add">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">姓名：</label>
+                <label class="col-sm-3 control-label">所在支部：</label>
                 <div class="col-sm-8">
-                    <input name="empName" class="form-control" type="text">
+                    <input name="collegeName" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">性别：</label>
+                <label class="col-sm-3 control-label">已提交入党申请书数量：</label>
                 <div class="col-sm-8">
-                    <select name="sex" class="form-control m-b">
-                        <option value="">所有</option>
-                    </select>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                    <input name="submitNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">部门：</label>
+                <label class="col-sm-3 control-label">现有入党积极分子存量：</label>
                 <div class="col-sm-8">
-                    <input name="deptId" class="form-control" type="text">
+                    <input name="activistNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">系部：</label>
+                <label class="col-sm-3 control-label">拟发展时间：</label>
                 <div class="col-sm-8">
-                    <input name="department" class="form-control" type="text">
+                    <input name="developmentTime" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">职务：</label>
+                <label class="col-sm-3 control-label">拟发展计划数：</label>
                 <div class="col-sm-8">
-                    <input name="post" class="form-control" type="text">
+                    <input name="developmentNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">工作职业：</label>
+                <label class="col-sm-3 control-label">现有党员数：</label>
                 <div class="col-sm-8">
-                    <input name="job" class="form-control" type="text">
+                    <input name="partyNumber" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">其他：</label>
+                <div class="col-sm-8">
+                    <input name="other" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -65,14 +68,14 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var prefix = ctx + "system/division"
-        $("#form-division-add").validate({
+        var prefix = ctx + "system/development"
+        $("#form-development-add").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-division-add').serialize());
+                $.operate.save(prefix + "/add", $('#form-development-add').serialize());
             }
         }
     </script>

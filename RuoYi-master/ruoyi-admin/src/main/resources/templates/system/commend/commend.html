@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('7.1.1-2“五四彰”、“七一彰”列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -10,9 +10,15 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
+                            <li class="select-time">
+                                <label>日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+                            </li>
                             <li>
                                 <label>姓名：</label>
-                                <input type="text" name="empName"/>
+                                <input type="text" name="stuName"/>
                             </li>
                             <li>
                                 <label>性别：</label>
@@ -22,20 +28,20 @@
                                 </select>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>专业名称：</label>
+                                <input type="text" name="marjor"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>培养层次：</label>
+                                <input type="text" name="eduLevel"/>
                             </li>
                             <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
+                                <label>五四表彰：</label>
+                                <input type="text" name="fiveFour"/>
                             </li>
                             <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>七一表彰：</label>
+                                <input type="text" name="sevenOne"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +60,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:commend:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:commend:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:commend:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:commend:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +80,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:commend:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:commend:remove')}]];
+        var prefix = ctx + "system/commend";
 
         $(function() {
             var options = {
@@ -85,7 +91,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "7.1.1-2“五四彰”、“七一彰”",
                 columns: [{
                     checkbox: true
                 },
@@ -95,7 +101,11 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
+                    field: 'time',
+                    title: '日期'
+                },
+                {
+                    field: 'stuName',
                     title: '姓名'
                 },
                 {
@@ -103,20 +113,20 @@
                     title: '性别'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'marjor',
+                    title: '专业名称'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
+                    field: 'eduLevel',
+                    title: '培养层次'
                 },
                 {
-                    field: 'post',
-                    title: '职务'
+                    field: 'fiveFour',
+                    title: '五四表彰'
                 },
                 {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'sevenOne',
+                    title: '七一表彰'
                 },
                 {
                     field: 'useStatus',
