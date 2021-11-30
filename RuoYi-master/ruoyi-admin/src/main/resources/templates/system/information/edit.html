@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改5.1.1-1 学院教学管理职责分工一览')" />
+    <th:block th:include="include :: header('修改5.1.1-2 学院教学管理人员信息')" />
+    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-division-edit" th:object="${teamStrDivision}">
+        <form class="form-horizontal m" id="form-information-edit" th:object="${teamStrInformation}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
                 <label class="col-sm-3 control-label">姓名：</label>
@@ -29,6 +30,30 @@
                 </div>
             </div>
             <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证号：</label>
+                <div class="col-sm-8">
+                    <input name="idcard" th:field="*{idcard}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">最高学历：</label>
+                <div class="col-sm-8">
+                    <input name="highestEducation" th:field="*{highestEducation}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">最高学位：</label>
+                <div class="col-sm-8">
+                    <input name="highestDegree" th:field="*{highestDegree}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系方式：</label>
+                <div class="col-sm-8">
+                    <input name="tel" th:field="*{tel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
                 <label class="col-sm-3 control-label">系部：</label>
                 <div class="col-sm-8">
                     <input name="department" th:field="*{department}" class="form-control" type="text">
@@ -41,9 +66,18 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">工作职业：</label>
+                <label class="col-sm-3 control-label">行政级别：</label>
                 <div class="col-sm-8">
-                    <input name="job" th:field="*{job}" class="form-control" type="text">
+                    <input name="adminLevel" th:field="*{adminLevel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">入职时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="workTime" th:value="${#dates.format(teamStrInformation.workTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
@@ -65,17 +99,24 @@
         </form>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
-        var prefix = ctx + "system/division";
-        $("#form-division-edit").validate({
+        var prefix = ctx + "system/information";
+        $("#form-information-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-division-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-information-edit').serialize());
             }
         }
+
+        $("input[name='workTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
     </script>
 </body>
 </html>

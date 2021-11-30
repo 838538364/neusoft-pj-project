@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('5.2.1-2 学院制定的教学工作相关实施细则一览列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,25 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>姓名：</label>
-                                <input type="text" name="empName"/>
-                            </li>
-                            <li>
-                                <label>性别：</label>
-                                <select name="sex">
+                                <label>类别：</label>
+                                <select name="type">
                                     <option value="">所有</option>
                                     <option value="-1">代码生成请选择字典属性</option>
                                 </select>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>文件名称：</label>
+                                <input type="text" name="fileName"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>版本：</label>
+                                <input type="text" name="version"/>
                             </li>
-                            <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
-                            </li>
-                            <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                            <li class="select-time">
+                                <label>发布日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginReleaseTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endReleaseTime]"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +48,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:standards:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:standards:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:standards:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:standards:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +68,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:standards:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:standards:remove')}]];
+        var prefix = ctx + "system/standards";
 
         $(function() {
             var options = {
@@ -85,7 +79,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "5.2.1-2 学院制定的教学工作相关实施细则一览",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +89,20 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
-                    title: '姓名'
+                    field: 'type',
+                    title: '类别'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'fileName',
+                    title: '文件名称'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'version',
+                    title: '版本'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
-                },
-                {
-                    field: 'post',
-                    title: '职务'
-                },
-                {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'releaseTime',
+                    title: '发布日期'
                 },
                 {
                     field: 'useStatus',

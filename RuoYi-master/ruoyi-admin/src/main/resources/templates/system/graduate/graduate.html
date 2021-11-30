@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('7.1.2-2广东东软学院各专业优秀毕业生情况和典型事例列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>姓名：</label>
+                                <input type="text" name="stuName"/>
+                            </li>
+                            <li>
+                                <label>学号：</label>
+                                <input type="text" name="stuId"/>
+                            </li>
+                            <li>
+                                <label>性别：</label>
+                                <select name="sex">
+                                    <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>政治面貌：</label>
+                                <input type="text" name="political"/>
+                            </li>
+                            <li>
+                                <label>二级学院：</label>
+                                <input type="text" name="collegeName"/>
+                            </li>
+                            <li>
+                                <label>专业：</label>
+                                <input type="text" name="major"/>
+                            </li>
+                            <li>
+                                <label>班别：</label>
+                                <input type="text" name="className"/>
+                            </li>
+                            <li>
+                                <label>学制：</label>
+                                <input type="text" name="year"/>
+                            </li>
+                            <li>
+                                <label>辅导员：</label>
+                                <input type="text" name="teacherName"/>
+                            </li>
+                            <li>
+                                <label>荣誉称号：</label>
+                                <input type="text" name="honoraryName"/>
+                            </li>
+                            <li>
+                                <label>表彰单位：</label>
+                                <input type="text" name="commendUnit"/>
+                            </li>
+                            <li class="select-time">
+                                <label>表彰时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCommendTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCommendTime]"/>
+                            </li>
+                            <li>
+                                <label>是否进行专题报道：</label>
+                                <input type="text" name="isReport"/>
+                            </li>
+                            <li>
+                                <label>其他：</label>
+                                <input type="text" name="other"/>
+                            </li>
+                            <li>
+                                <label>是否使用：</label>
+                                <select name="useStatus">
+                                    <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
+                                </select>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:graduate:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:graduate:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:graduate:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:graduate:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:graduate:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:graduate:remove')}]];
+        var prefix = ctx + "system/graduate";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "7.1.2-2广东东软学院各专业优秀毕业生情况和典型事例",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    visible: false
+                },
+                {
+                    field: 'stuName',
+                    title: '姓名'
+                },
+                {
+                    field: 'stuId',
+                    title: '学号'
+                },
+                {
+                    field: 'sex',
+                    title: '性别'
+                },
+                {
+                    field: 'political',
+                    title: '政治面貌'
+                },
+                {
+                    field: 'collegeName',
+                    title: '二级学院'
+                },
+                {
+                    field: 'major',
+                    title: '专业'
+                },
+                {
+                    field: 'className',
+                    title: '班别'
+                },
+                {
+                    field: 'year',
+                    title: '学制'
+                },
+                {
+                    field: 'teacherName',
+                    title: '辅导员'
+                },
+                {
+                    field: 'honoraryName',
+                    title: '荣誉称号'
+                },
+                {
+                    field: 'commendUnit',
+                    title: '表彰单位'
+                },
+                {
+                    field: 'commendTime',
+                    title: '表彰时间'
+                },
+                {
+                    field: 'isReport',
+                    title: '是否进行专题报道'
+                },
+                {
+                    field: 'other',
+                    title: '其他'
+                },
+                {
+                    field: 'useStatus',
+                    title: '是否使用'
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

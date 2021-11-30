@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('4.3.2-10学生校外实习情况列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,40 @@
                     <div class="select-list">
                         <ul>
                             <li>
+                                <label>专业：</label>
+                                <input type="text" name="major"/>
+                            </li>
+                            <li>
+                                <label>层次：</label>
+                                <input type="text" name="eduLevel"/>
+                            </li>
+                            <li>
+                                <label>班级：</label>
+                                <input type="text" name="cla"/>
+                            </li>
+                            <li>
+                                <label>学号：</label>
+                                <input type="text" name="stuId"/>
+                            </li>
+                            <li>
                                 <label>姓名：</label>
-                                <input type="text" name="empName"/>
+                                <input type="text" name="stuName"/>
                             </li>
                             <li>
-                                <label>性别：</label>
-                                <select name="sex">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                <label>实习单位：</label>
+                                <input type="text" name="practiceAddress"/>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>实习指导老师：</label>
+                                <input type="text" name="practiceName"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>实习时间：</label>
+                                <input type="text" name="practiceTime"/>
                             </li>
                             <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
-                            </li>
-                            <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>实习成绩：</label>
+                                <input type="text" name="practiceScore"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +63,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:school:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:school:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:school:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:school:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +83,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:school:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:school:remove')}]];
+        var prefix = ctx + "system/school";
 
         $(function() {
             var options = {
@@ -85,7 +94,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "4.3.2-10学生校外实习情况",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +104,40 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
+                    field: 'major',
+                    title: '专业'
+                },
+                {
+                    field: 'eduLevel',
+                    title: '层次'
+                },
+                {
+                    field: 'cla',
+                    title: '班级'
+                },
+                {
+                    field: 'stuId',
+                    title: '学号'
+                },
+                {
+                    field: 'stuName',
                     title: '姓名'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'practiceAddress',
+                    title: '实习单位'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'practiceName',
+                    title: '实习指导老师'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
+                    field: 'practiceTime',
+                    title: '实习时间'
                 },
                 {
-                    field: 'post',
-                    title: '职务'
-                },
-                {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'practiceScore',
+                    title: '实习成绩'
                 },
                 {
                     field: 'useStatus',

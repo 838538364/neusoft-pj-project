@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('7.1.2-3广东东软学院各专业优秀班集体统计列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,31 +11,48 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>姓名：</label>
-                                <input type="text" name="empName"/>
+                                <label>二级学院：</label>
+                                <input type="text" name="secondaryCollege"/>
                             </li>
                             <li>
-                                <label>性别：</label>
-                                <select name="sex">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                <label>年级专业班级：</label>
+                                <input type="text" name="gradeProfessionalClass"/>
                             </li>
                             <li>
-                                <label>部门：</label>
-                                <input type="text" name="deptId"/>
+                                <label>成员数：</label>
+                                <input type="text" name="members"/>
                             </li>
                             <li>
-                                <label>系部：</label>
-                                <input type="text" name="department"/>
+                                <label>班长姓名：</label>
+                                <input type="text" name="monitorName"/>
                             </li>
                             <li>
-                                <label>职务：</label>
-                                <input type="text" name="post"/>
+                                <label>辅导员姓名：</label>
+                                <input type="text" name="counselorName"/>
                             </li>
                             <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>受处分人数：</label>
+                                <input type="text" name="peoplePunished"/>
+                            </li>
+                            <li>
+                                <label>获奖人数：</label>
+                                <input type="text" name="winners"/>
+                            </li>
+                            <li>
+                                <label>是否推荐为学风标兵班：</label>
+                                <input type="text" name="isModelClass"/>
+                            </li>
+                            <li>
+                                <label>荣誉称号：</label>
+                                <input type="text" name="honoraryTitle"/>
+                            </li>
+                            <li>
+                                <label>表彰时间：</label>
+                                <input type="text" name="recognitionTime"/>
+                            </li>
+                            <li>
+                                <label>表彰单位：</label>
+                                <input type="text" name="recognitionUnit"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +71,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:cadres:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:cadres:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:cadres:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:cadres:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +91,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:cadres:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:cadres:remove')}]];
+        var prefix = ctx + "system/cadres";
 
         $(function() {
             var options = {
@@ -85,7 +102,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "7.1.2-3广东东软学院各专业优秀班集体统计",
                 columns: [{
                     checkbox: true
                 },
@@ -95,28 +112,48 @@
                     visible: false
                 },
                 {
-                    field: 'empName',
-                    title: '姓名'
+                    field: 'secondaryCollege',
+                    title: '二级学院'
                 },
                 {
-                    field: 'sex',
-                    title: '性别'
+                    field: 'gradeProfessionalClass',
+                    title: '年级专业班级'
                 },
                 {
-                    field: 'deptId',
-                    title: '部门'
+                    field: 'members',
+                    title: '成员数'
                 },
                 {
-                    field: 'department',
-                    title: '系部'
+                    field: 'monitorName',
+                    title: '班长姓名'
                 },
                 {
-                    field: 'post',
-                    title: '职务'
+                    field: 'counselorName',
+                    title: '辅导员姓名'
                 },
                 {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'peoplePunished',
+                    title: '受处分人数'
+                },
+                {
+                    field: 'winners',
+                    title: '获奖人数'
+                },
+                {
+                    field: 'isModelClass',
+                    title: '是否推荐为学风标兵班'
+                },
+                {
+                    field: 'honoraryTitle',
+                    title: '荣誉称号'
+                },
+                {
+                    field: 'recognitionTime',
+                    title: '表彰时间'
+                },
+                {
+                    field: 'recognitionUnit',
+                    title: '表彰单位'
                 },
                 {
                     field: 'useStatus',

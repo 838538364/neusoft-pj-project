@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeachPraOutsideSchoolMapper">
+    
+    <resultMap type="TeachPraOutsideSchool" id="TeachPraOutsideSchoolResult">
+        <result property="id"    column="id"    />
+        <result property="major"    column="major"    />
+        <result property="eduLevel"    column="edu_level"    />
+        <result property="cla"    column="cla"    />
+        <result property="stuId"    column="stu_id"    />
+        <result property="stuName"    column="stu_name"    />
+        <result property="practiceAddress"    column="practice_address"    />
+        <result property="practiceName"    column="practice_name"    />
+        <result property="practiceTime"    column="practice_time"    />
+        <result property="practiceScore"    column="practice_score"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTeachPraOutsideSchoolVo">
+        select id, major, edu_level, cla, stu_id, stu_name, practice_address, practice_name, practice_time, practice_score, use_status, create_by, create_time, update_by, update_time, remark from teach_pra_outside_school
+    </sql>
+
+    <select id="selectTeachPraOutsideSchoolList" parameterType="TeachPraOutsideSchool" resultMap="TeachPraOutsideSchoolResult">
+        <include refid="selectTeachPraOutsideSchoolVo"/>
+        <where>  
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="eduLevel != null  and eduLevel != ''"> and edu_level = #{eduLevel}</if>
+            <if test="cla != null  and cla != ''"> and cla = #{cla}</if>
+            <if test="stuId != null  and stuId != ''"> and stu_id = #{stuId}</if>
+            <if test="stuName != null  and stuName != ''"> and stu_name like concat('%', #{stuName}, '%')</if>
+            <if test="practiceAddress != null  and practiceAddress != ''"> and practice_address = #{practiceAddress}</if>
+            <if test="practiceName != null  and practiceName != ''"> and practice_name like concat('%', #{practiceName}, '%')</if>
+            <if test="practiceTime != null  and practiceTime != ''"> and practice_time = #{practiceTime}</if>
+            <if test="practiceScore != null  and practiceScore != ''"> and practice_score = #{practiceScore}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectTeachPraOutsideSchoolById" parameterType="Long" resultMap="TeachPraOutsideSchoolResult">
+        <include refid="selectTeachPraOutsideSchoolVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTeachPraOutsideSchool" parameterType="TeachPraOutsideSchool" useGeneratedKeys="true" keyProperty="id">
+        insert into teach_pra_outside_school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="major != null">major,</if>
+            <if test="eduLevel != null">edu_level,</if>
+            <if test="cla != null">cla,</if>
+            <if test="stuId != null">stu_id,</if>
+            <if test="stuName != null">stu_name,</if>
+            <if test="practiceAddress != null">practice_address,</if>
+            <if test="practiceName != null">practice_name,</if>
+            <if test="practiceTime != null">practice_time,</if>
+            <if test="practiceScore != null">practice_score,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="major != null">#{major},</if>
+            <if test="eduLevel != null">#{eduLevel},</if>
+            <if test="cla != null">#{cla},</if>
+            <if test="stuId != null">#{stuId},</if>
+            <if test="stuName != null">#{stuName},</if>
+            <if test="practiceAddress != null">#{practiceAddress},</if>
+            <if test="practiceName != null">#{practiceName},</if>
+            <if test="practiceTime != null">#{practiceTime},</if>
+            <if test="practiceScore != null">#{practiceScore},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTeachPraOutsideSchool" parameterType="TeachPraOutsideSchool">
+        update teach_pra_outside_school
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="major != null">major = #{major},</if>
+            <if test="eduLevel != null">edu_level = #{eduLevel},</if>
+            <if test="cla != null">cla = #{cla},</if>
+            <if test="stuId != null">stu_id = #{stuId},</if>
+            <if test="stuName != null">stu_name = #{stuName},</if>
+            <if test="practiceAddress != null">practice_address = #{practiceAddress},</if>
+            <if test="practiceName != null">practice_name = #{practiceName},</if>
+            <if test="practiceTime != null">practice_time = #{practiceTime},</if>
+            <if test="practiceScore != null">practice_score = #{practiceScore},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTeachPraOutsideSchoolById" parameterType="Long">
+        delete from teach_pra_outside_school where id = #{id}
+    </delete>
+
+    <delete id="deleteTeachPraOutsideSchoolByIds" parameterType="String">
+        delete from teach_pra_outside_school where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

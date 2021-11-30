@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('5.1.1-1 学院教学管理职责分工一览列表')" />
+    <th:block th:include="include :: header('5.1.1-2 学院教学管理人员信息列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -26,6 +26,22 @@
                                 <input type="text" name="deptId"/>
                             </li>
                             <li>
+                                <label>身份证号：</label>
+                                <input type="text" name="idcard"/>
+                            </li>
+                            <li>
+                                <label>最高学历：</label>
+                                <input type="text" name="highestEducation"/>
+                            </li>
+                            <li>
+                                <label>最高学位：</label>
+                                <input type="text" name="highestDegree"/>
+                            </li>
+                            <li>
+                                <label>联系方式：</label>
+                                <input type="text" name="tel"/>
+                            </li>
+                            <li>
                                 <label>系部：</label>
                                 <input type="text" name="department"/>
                             </li>
@@ -34,8 +50,14 @@
                                 <input type="text" name="post"/>
                             </li>
                             <li>
-                                <label>工作职业：</label>
-                                <input type="text" name="job"/>
+                                <label>行政级别：</label>
+                                <input type="text" name="adminLevel"/>
+                            </li>
+                            <li class="select-time">
+                                <label>入职时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginWorkTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endWorkTime]"/>
                             </li>
                             <li>
                                 <label>是否使用：</label>
@@ -54,16 +76,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:division:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:information:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:division:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:information:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:division:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:information:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:division:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:information:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -74,9 +96,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:division:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:division:remove')}]];
-        var prefix = ctx + "system/division";
+        var editFlag = [[${@permission.hasPermi('system:information:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:information:remove')}]];
+        var prefix = ctx + "system/information";
 
         $(function() {
             var options = {
@@ -85,7 +107,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "5.1.1-1 学院教学管理职责分工一览",
+                modalName: "5.1.1-2 学院教学管理人员信息",
                 columns: [{
                     checkbox: true
                 },
@@ -107,6 +129,22 @@
                     title: '部门'
                 },
                 {
+                    field: 'idcard',
+                    title: '身份证号'
+                },
+                {
+                    field: 'highestEducation',
+                    title: '最高学历'
+                },
+                {
+                    field: 'highestDegree',
+                    title: '最高学位'
+                },
+                {
+                    field: 'tel',
+                    title: '联系方式'
+                },
+                {
                     field: 'department',
                     title: '系部'
                 },
@@ -115,8 +153,12 @@
                     title: '职务'
                 },
                 {
-                    field: 'job',
-                    title: '工作职业'
+                    field: 'adminLevel',
+                    title: '行政级别'
+                },
+                {
+                    field: 'workTime',
+                    title: '入职时间'
                 },
                 {
                     field: 'useStatus',

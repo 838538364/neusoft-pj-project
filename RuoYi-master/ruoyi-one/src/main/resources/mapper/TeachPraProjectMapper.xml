@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeachPraProjectMapper">
+    
+    <resultMap type="TeachPraProject" id="TeachPraProjectResult">
+        <result property="id"    column="id"    />
+        <result property="college"    column="college"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="empName"    column="emp_name"    />
+        <result property="grade"    column="grade"    />
+        <result property="major"    column="major"    />
+        <result property="stuNum"    column="stu_num"    />
+        <result property="useStatus"    column="use_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTeachPraProjectVo">
+        select id, college, project_id, project_name, emp_name, grade, major, stu_num, use_status, create_by, create_time, update_by, update_time, remark from teach_pra_project
+    </sql>
+
+    <select id="selectTeachPraProjectList" parameterType="TeachPraProject" resultMap="TeachPraProjectResult">
+        <include refid="selectTeachPraProjectVo"/>
+        <where>  
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="empName != null  and empName != ''"> and emp_name like concat('%', #{empName}, '%')</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="stuNum != null  and stuNum != ''"> and stu_num = #{stuNum}</if>
+            <if test="useStatus != null  and useStatus != ''"> and use_status = #{useStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectTeachPraProjectById" parameterType="Long" resultMap="TeachPraProjectResult">
+        <include refid="selectTeachPraProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTeachPraProject" parameterType="TeachPraProject" useGeneratedKeys="true" keyProperty="id">
+        insert into teach_pra_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="college != null">college,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="empName != null">emp_name,</if>
+            <if test="grade != null">grade,</if>
+            <if test="major != null">major,</if>
+            <if test="stuNum != null">stu_num,</if>
+            <if test="useStatus != null">use_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="college != null">#{college},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="empName != null">#{empName},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="major != null">#{major},</if>
+            <if test="stuNum != null">#{stuNum},</if>
+            <if test="useStatus != null">#{useStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTeachPraProject" parameterType="TeachPraProject">
+        update teach_pra_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="college != null">college = #{college},</if>
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="stuNum != null">stu_num = #{stuNum},</if>
+            <if test="useStatus != null">use_status = #{useStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTeachPraProjectById" parameterType="Long">
+        delete from teach_pra_project where id = #{id}
+    </delete>
+
+    <delete id="deleteTeachPraProjectByIds" parameterType="String">
+        delete from teach_pra_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
